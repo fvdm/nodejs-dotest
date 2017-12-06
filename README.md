@@ -1,8 +1,6 @@
 dotest
 ======
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/fvdm/nodejs-dotest.svg)](https://greenkeeper.io/)
-
 One dev dependency to run ESLint, your test.js, coverage and report to Coveralls.io
 Or only run the test.js without doing anything else.
 
@@ -11,6 +9,7 @@ Or only run the test.js without doing anything else.
 [![Coverage Status](https://coveralls.io/repos/github/fvdm/nodejs-dotest/badge.svg?branch=master)](https://coveralls.io/github/fvdm/nodejs-dotest?branch=master)
 [![Dependencies](https://www.bithound.io/github/fvdm/nodejs-dotest/badges/dependencies.svg)](https://www.bithound.io/github/fvdm/nodejs-dotest/master/dependencies/npm)
 [![Code Quality](https://www.bithound.io/github/fvdm/nodejs-dotest/badges/code.svg)](https://www.bithound.io/github/fvdm/nodejs-dotest)
+[![Greenkeeper badge](https://badges.greenkeeper.io/fvdm/nodejs-dotest.svg)](https://greenkeeper.io/)
 
 * It first lists all new commits sinces the last release (tag) without their relative date and author
 * Then runs ESLint with your package's `.eslintrc` config
