@@ -1,6 +1,8 @@
 dotest
 ======
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/fvdm/nodejs-dotest.svg)](https://greenkeeper.io/)
+
 One dev dependency to run ESLint, your test.js, coverage and report to Coveralls.io
 Or only run the test.js without doing anything else.
 
