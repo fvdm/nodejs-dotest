@@ -63,7 +63,7 @@ if [[ "$TRAVIS" == "true" ]]; then
   if [[ -x "$codacyBin" ]]; then
     echo
     echo "Sending coverage report to Codacy..."
-    (cat "$(pwd)/coverage/lcov.info" | $codacyBin) || result=1
+    $codacyBin < $(pwd)/coverage/lcov.info || result=1
     echo
   else
     result=1
