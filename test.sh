@@ -63,11 +63,11 @@ if [[ "$TRAVIS" == "true" ]]; then
   if [[ -x "$codacyBin" ]]; then
     echo
     echo "Sending coverage report to Codacy..."
-    "$codacyBin" < "$(pwd)/coverage/lcov.info" || result=1
+    (cat "$(pwd)/coverage/lcov.info" | $codacyBin) || result=1
     echo
   else
     result=1
-    echo -e "\033[31mERROR:\033[0m Coveralls is not installed"
+    echo -e "\033[31mERROR:\033[0m codacy-coverage is not installed"
     echo "Run 'npm i' to install all dependencies."
     echo
   fi
