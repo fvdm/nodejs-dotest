@@ -32,24 +32,6 @@
     "eslint": "^5.15.2",
     "nyc": "^14.1.1"
   },
-  "nyc": {
-    "check-coverage": true,
-    "branches": 85,
-    "lines": 85,
-    "functions": 85,
-    "statements": 85,
-    "all": true,
-    "exclude": [
-      "**/example.js",
-      "**/coverage/**",
-      "**/packages/**",
-      "**/.git/**"
-    ],
-    "reporter": [
-      "lcov",
-      "text"
-    ]
-  },
   "engines": {
     "node": ">=8.0.0"
   },

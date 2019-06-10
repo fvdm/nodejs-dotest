@@ -59,7 +59,23 @@ fi
 
 # Run test script with coverage
 if [[ -x "$nycBin" ]]; then
-  "$nycBin" --clean node test.js || result=1
+  cd "$libpath"
+
+  "$nycBin" \
+  --clean \
+  --check-coverage \
+  --branches=85 \
+  --lines=85 \
+  --functions=85 \
+  --statements=85 \
+  --all \
+  --exclude='**/example.js' \
+  --exclude='**/coverage/**' \
+  --exclude='**/packages/**' \
+  --exclude='**/.git/**' \
+  --reporter=lcov \
+  --reporter=text \
+  node test.js || result=1
 else
   result=1
   echo -e "\033[31mERROR:\033[0m nyc is not installed"
@@ -70,6 +86,8 @@ fi
 # Submit coverage to Coveralls.io
 if [[ "$TRAVIS" == "true" ]]; then
   if [[ -x "$coverallsBin" ]]; then
+    cd "$libpath"
+
     echo
     echo "Sending coverage report to Coveralls..."
     "$coverallsBin" < "$(pwd)/coverage/lcov.info" || result=1
@@ -85,6 +103,8 @@ fi
 # Submit coverage to Codacy
 if [[ -n "$CODACY_PROJECT_TOKEN" ]]; then
   if [[ -x "$codacyBin" ]]; then
+    cd "$libpath"
+
     echo
     echo "Sending coverage report to Codacy..."
     "$codacyBin" < "$(pwd)/coverage/lcov.info" || result=1
