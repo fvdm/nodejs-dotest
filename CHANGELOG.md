@@ -1,3 +1,9 @@
+#### 2.6.1 (2019-06-10)
+
+##### Bug Fixes
+
+*  Coverage didn’t run in the pkg context ([682dc728](https://github.com/fvdm/nodejs-dotest/commit/682dc728dff680e6db75354c070bd098b30efd9c))
+
 ### 2.6.0 (2019-06-10)
 
 ##### Chores
