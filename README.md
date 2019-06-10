@@ -14,7 +14,7 @@ your test.js, coverage and report to Coveralls.io when running on Travis CI.
 * Finally it runs your `test.js` with `istanbul` for coverage
 * When it detects Travis CI it will also submit the coverage report to [Coveralls.io](https://coveralls.io)
 
-[![Console example](https://frankl.in/wp-content/uploads/2016/05/nodejs_dotest_example-340x400.png)](https://frankl.in/micro/nodejs-dotest-console-output)
+[![Console example](https://fvdm.com/wp-content/uploads/2016/05/nodejs_dotest_example-340x400.png)](https://fvdm.com/micro/nodejs-dotest-console-output)
 
 
 Example
@@ -88,7 +88,7 @@ The script takes these env variables. They override the code settings.
 
 
 name        | default | description
-:-----------|:--------|:-----------------------------------------
+:-----------|:--------|:-----------
 DOTEST_WAIT | 0       | Pause between tests, in ms (1000 = 1 sec)
 
 
@@ -116,7 +116,7 @@ Run the tests from the queue, one by one.
 
 
 param | type   | required | default | description
-:-----|:-------|:---------|:--------|:--------------------------------------------
+:-----|:-------|:---------|:--------|:-----------
 wait  | int    | no       | 0       | Wait time between tests in ms (1000 = 1 sec)
 
 
@@ -144,7 +144,7 @@ str         | string  |         | The string to output
 
 
 style | description
-:-----|:------------------------------------
+:-----|:-----------
 fail  | `FAIL    Text` with _FAIL_ in red
 good  | `good    Text` with _good_ in green
 warn  | `warn    Text` with _warn_ in yellow
