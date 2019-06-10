@@ -131,15 +131,16 @@ doTest.run (2000);
 
 .log
 ----
-**( [type], str )**
+**( [type], str, [dontCount] )**
 
 Fancy `console.log` with style.
 
 
-param | type   | required | default | description
-:-----|:-------|:---------|:--------|:------------------------------
-type  | string | no       | plain   | Text style to apply, see below
-str   | string | yes      |         | The string to output
+param       | type    | default | description
+:-----------|:--------|:--------|:-----------
+[type]      | string  | plain   | Text style to apply, see below
+str         | string  |         | The string to output
+[dontCount] | boolean | false   | Don't count a fail or error towards the exit status
 
 
 style | description
@@ -293,7 +294,7 @@ test()
 
 test() .fail
 ------------
-**( message )**
+**( message, [dontCount] )**
 
 Output 'FAIL' log line.
 
@@ -313,7 +314,7 @@ test()
 
 test() .error
 -------------
-**( err )**
+**( err, [dontCount] )**
 
 Output 'ERROR' log line with dump and stack trace.
 

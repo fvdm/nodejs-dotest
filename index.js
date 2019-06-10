@@ -76,11 +76,12 @@ function colorStr (color, str) {
  *
  * @return  {void}
  *
- * @param   {string}  [type=plain]  Formatting style
- * @param   {string}  str           The string to alter
+ * @param   {string}   [type=plain]  Formatting style
+ * @param   {string}   str           The string to alter
+ * @param   {boolean}  [dontCount]   Don't count the fails
  */
 
-function log (type, str) {
+function log (type, str, dontCount) {
   const types = {
     good: ['green', 'good'],
     info: ['cyan', 'info']
@@ -96,7 +97,7 @@ function log (type, str) {
       console.log (colorStr ('bold', str));
       break;
     case 'fail':
-      counters.fail++;
+      if (!dontCount) { counters.fail++; }
       console.log (colorStr ('red', 'FAIL') + '    ' + str);
       break;
     case 'warn':
@@ -104,7 +105,7 @@ function log (type, str) {
       console.log (colorStr ('yellow', 'warn') + '    ' + str);
       break;
     case 'error':
-      counters.fail++;
+      if (!dontCount) { counters.fail++; }
       console.log (colorStr ('red', 'ERROR  ') + str.message + '\n');
       console.dir (str, {
         depth: null,
@@ -420,34 +421,34 @@ process.on ('uncaughtException', uncaughtException);
  * Methods for test()
  */
 
-function testLog (level, str) {
+function testLog (level, str, dontCount) {
   const typestr = typeStr (str);
   const doDump = typestr.match (/(object|array)/) && typestr.match (/ \(\d+\)/);
 
   if (typeof str === 'string') {
-    log (level, str);
+    log (level, str, dontCount);
     return;
   }
 
-  log (level, typestr);
+  log (level, typestr, dontCount);
 
   if (doDump) {
-    log ('object', str);
+    log ('object', str, dontCount);
   }
 }
 
 unitTests = {
   done: done,
-  error: (str) => {
-    log ('error', str);
+  error: (str, dontCount) => {
+    log ('error', str, dontCount);
     return unitTests;
   },
   good: (str) => {
     testLog ('good', str);
     return unitTests;
   },
-  fail: (str) => {
-    testLog ('fail', str);
+  fail: (str, dontCount) => {
+    testLog ('fail', str, dontCount);
     return unitTests;
   },
   warn: (str) => {
