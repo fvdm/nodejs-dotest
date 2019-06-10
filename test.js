@@ -86,6 +86,8 @@ doTest.add ('test() .info()', (test) => {
 doTest.add ('Methods', (test, fake) => {
   const colorTest = doTest.colorStr ('magenta', 'magenta');
   const colorMatch = '\u001b[35mmagenta\u001b[0m';
+  /* istanbul ignore next */
+  const TestFunction = () => {};
 
   doTest.log ('.log() This is a plain (default) message');
   doTest.log ('.log() This is a plain (preset) message');
@@ -107,7 +109,7 @@ doTest.add ('Methods', (test, fake) => {
     .isNull ('fail', 'test() .isNull', null)
     .isNaN ('fail', 'test() .isNaN', NaN)
     .isBoolean ('fail', 'test() .isBoolean', true)
-    .isFunction ('fail', 'test() .isFunction', () => {})
+    .isFunction ('fail', 'test() .isFunction', TestFunction)
     .isDate ('fail', 'test() .isDate', new Date ())
     .isExactly ('fail', 'test() .isExactly', ':)', ':)')
     .isNot ('fail', 'test() .isNot', 'a', 'b')
@@ -140,6 +142,8 @@ doTest.add ('Methods', (test, fake) => {
     .isExactly ('fail', '.getType', doTest.getType ([]), 'array')
     .isExactly ('fail', '.colorStr', colorTest, colorMatch)
     .isEmpty ('warn', 'output() warn', 'test warning')
+    .error (new Error ('This is an error'), true)
+    .fail ('This is a fail message', true)
     .warn ('This is a warn message')
     .good ('This is a good message')
     .done (() => {
