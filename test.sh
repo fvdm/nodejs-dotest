@@ -3,7 +3,7 @@ result=0
 libpath="$(pwd)"
 nodebin="$libpath/node_modules/.bin"
 eslintBin="$nodebin/eslint"
-istanbulBin="$nodebin/istanbul"
+nycBin="$nodebin/nyc"
 coverallsBin="$nodebin/coveralls"
 codacyBin="$nodebin/codacy-coverage"
 
@@ -58,11 +58,11 @@ else
 fi
 
 # Run test script with coverage
-if [[ -x "$istanbulBin" ]]; then
-  "$istanbulBin" cover test.js || result=1
+if [[ -x "$nycBin" ]]; then
+  "$nycBin" --clean node test.js || result=1
 else
   result=1
-  echo -e "\033[31mERROR:\033[0m Istanbul is not installed"
+  echo -e "\033[31mERROR:\033[0m nyc is not installed"
   echo "Run 'npm i' to install all dependencies."
   echo
 fi
