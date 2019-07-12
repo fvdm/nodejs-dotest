@@ -1,3 +1,41 @@
+#### 2.6.1 (2019-06-10)
+
+##### Bug Fixes
+
+*  Coverage didn’t run in the pkg context ([682dc728](https://github.com/fvdm/nodejs-dotest/commit/682dc728dff680e6db75354c070bd098b30efd9c))
+
+### 2.6.0 (2019-06-10)
+
+##### Chores
+
+* **package:**
+  *  Update dependencies ([0bcf0730](https://github.com/fvdm/nodejs-dotest/commit/0bcf07301ee0edfe0264f4f5dabe1833fd9bb4d2))
+  *  Update minimum node version ([f138e11b](https://github.com/fvdm/nodejs-dotest/commit/f138e11bc363f523ab35a5570908197aa283e326))
+  *  update eslint to version 5.15.2 ([#30](https://github.com/fvdm/nodejs-dotest/pull/30)) ([9a4401d1](https://github.com/fvdm/nodejs-dotest/commit/9a4401d14178fac7d4cd74a97e4301641ebd1dc7))
+
+##### Documentation Changes
+
+*  Minor clean up ([d48e381c](https://github.com/fvdm/nodejs-dotest/commit/d48e381cee2dbbd8cfddfe0d99cba0a51f9be7ed))
+
+##### New Features
+
+*  Add log() dontCount argument ([786d1ca9](https://github.com/fvdm/nodejs-dotest/commit/786d1ca9a17dfc98c07031831cbec8619284cc69))
+
+##### Bug Fixes
+
+* **runner:**  Incorrect Codacy env check ([667f55d3](https://github.com/fvdm/nodejs-dotest/commit/667f55d32d81aeb2562284a0d407d647b3c82df1))
+
+##### Refactors
+
+*  Replaced istanbul with nyc ([330083e4](https://github.com/fvdm/nodejs-dotest/commit/330083e47599ae3314c8c4126ecd394a2375ff88))
+
+##### Tests
+
+*  Improve coverage for error() and fail() ([2892933a](https://github.com/fvdm/nodejs-dotest/commit/2892933a6776b9209a33caf546fa1183f8111d33))
+* **config:**
+  *  Update Travis node versions ([0fb58f79](https://github.com/fvdm/nodejs-dotest/commit/0fb58f793411ddd8d6f130d1c0085ff79f9ae098))
+  *  Update ESLint ES version to 2017 ([57bfb71f](https://github.com/fvdm/nodejs-dotest/commit/57bfb71f62fe4ee1b363efaf6d0f3e1b52e83404))
+
 ### 2.5.0 (2018-07-25)
 
 ##### New Features

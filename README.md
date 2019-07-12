@@ -14,7 +14,7 @@ your test.js, coverage and report to Coveralls.io when running on Travis CI.
 * Finally it runs your `test.js` with `istanbul` for coverage
 * When it detects Travis CI it will also submit the coverage report to [Coveralls.io](https://coveralls.io)
 
-[![Console example](https://frankl.in/wp-content/uploads/2016/05/nodejs_dotest_example-340x400.png)](https://frankl.in/micro/nodejs-dotest-console-output)
+[![Console example](https://fvdm.com/wp-content/uploads/2016/05/nodejs_dotest_example-340x400.png)](https://fvdm.com/micro/nodejs-dotest-console-output)
 
 
 Example
@@ -88,7 +88,7 @@ The script takes these env variables. They override the code settings.
 
 
 name        | default | description
-:-----------|:--------|:-----------------------------------------
+:-----------|:--------|:-----------
 DOTEST_WAIT | 0       | Pause between tests, in ms (1000 = 1 sec)
 
 
@@ -116,7 +116,7 @@ Run the tests from the queue, one by one.
 
 
 param | type   | required | default | description
-:-----|:-------|:---------|:--------|:--------------------------------------------
+:-----|:-------|:---------|:--------|:-----------
 wait  | int    | no       | 0       | Wait time between tests in ms (1000 = 1 sec)
 
 
@@ -131,19 +131,20 @@ doTest.run (2000);
 
 .log
 ----
-**( [type], str )**
+**( [type], str, [dontCount] )**
 
 Fancy `console.log` with style.
 
 
-param | type   | required | default | description
-:-----|:-------|:---------|:--------|:------------------------------
-type  | string | no       | plain   | Text style to apply, see below
-str   | string | yes      |         | The string to output
+param       | type    | default | description
+:-----------|:--------|:--------|:-----------
+[type]      | string  | plain   | Text style to apply, see below
+str         | string  |         | The string to output
+[dontCount] | boolean | false   | Don't count a fail or error towards the exit status
 
 
 style | description
-:-----|:------------------------------------
+:-----|:-----------
 fail  | `FAIL    Text` with _FAIL_ in red
 good  | `good    Text` with _good_ in green
 warn  | `warn    Text` with _warn_ in yellow
@@ -293,7 +294,7 @@ test()
 
 test() .fail
 ------------
-**( message )**
+**( message, [dontCount] )**
 
 Output 'FAIL' log line.
 
@@ -313,7 +314,7 @@ test()
 
 test() .error
 -------------
-**( err )**
+**( err, [dontCount] )**
 
 Output 'ERROR' log line with dump and stack trace.
 

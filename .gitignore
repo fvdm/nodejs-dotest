@@ -13,6 +13,7 @@ lib-cov
 coverage
 .grunt
 .lock-wscript
+.nyc_output
 
 # Compile
 build/Release
