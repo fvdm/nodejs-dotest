@@ -28,7 +28,7 @@
   },
   "dependencies": {
     "codacy-coverage": "^3.4.0",
-    "coveralls": "^3.0.4",
+    "coveralls": "^3.0.6",
     "eslint": "^6.0.1",
     "nyc": "^14.1.1"
   },
