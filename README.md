@@ -28,23 +28,40 @@ const doTest = require ('dotest');
 const app = require ('./');
 
 // Check app interface
-doTest.add ('App interface', (test) => {
+doTest.add ('App interface', test => {
   test()
     .isFunction ('fail', 'methodOne', app.methodOne)
     .isObject ('fail', 'sub', app.sub)
     .isFunction ('fail', 'sub.methodTwo', app.sub.methodTwo)
-    .done();
+    .done()
+  ;
 });
 
 // Check method response
-doTest.add ('App methodOne', (test) => {
+doTest.add ('App methodOne', test => {
   app.methodOne ((err, data) => {
     test (err)
       .isObject ('fail', 'Callback data', data)
       .isArray ('fail', 'data.music', data.music)
       .isNotEmpty ('warn', 'data.music', data.music)
-      .done();
+      .done()
+    ;
   });
+});
+
+// Check promise
+doTest.add ('Promise good', async test => {
+  try {
+    const data = await myPromise();
+
+    test()
+      .isObject ('fail', 'data', data)
+      .done()
+    ;
+  }
+  catch (err) {
+    test (err).done();
+  }
 });
 
 // Run the tests
