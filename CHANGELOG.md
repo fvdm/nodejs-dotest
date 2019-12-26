@@ -1,3 +1,22 @@
+#### 2.6.2 (2019-12-26)
+
+##### Chores
+
+* **package:**
+  *  Update nyc to version 15.0.0 ([#36](https://github.com/fvdm/nodejs-dotest/pull/36)) ([2d70392d](https://github.com/fvdm/nodejs-dotest/commit/2d70392ddb25b5ef8d31ad4e6df88c5f00c8ea7c))
+  *  Update author url ([#35](https://github.com/fvdm/nodejs-dotest/pull/35)) ([8a1c8945](https://github.com/fvdm/nodejs-dotest/commit/8a1c89453e50a9519771470cdb15eb560da26830))
+  *  Update eslint to version 6.0.1 ([#32](https://github.com/fvdm/nodejs-dotest/pull/32)) ([9de46116](https://github.com/fvdm/nodejs-dotest/commit/9de461162949870371f35edfd215db2b92685735))
+* **deps:**  Update coveralls to v3.0.6 ([#34](https://github.com/fvdm/nodejs-dotest/pull/34)) ([ac3e4a66](https://github.com/fvdm/nodejs-dotest/commit/ac3e4a663af99cd8aa4e3a8790e603ef5d7f3cc0))
+* **security:**  Update ESLint to v6.2.2 ([#33](https://github.com/fvdm/nodejs-dotest/pull/33)) ([8305e249](https://github.com/fvdm/nodejs-dotest/commit/8305e249f58211928c7dc83048c90fc36adea494))
+
+##### Documentation Changes
+
+* **readme:**  Added Promise example ([adb9f92a](https://github.com/fvdm/nodejs-dotest/commit/adb9f92a66b583accdf9bddac235bd28c5b58dc0))
+
+##### Tests
+
+* **config:**  Update Node versions on Travis CI ([55f30c17](https://github.com/fvdm/nodejs-dotest/commit/55f30c17c65b5b75565f84e3d8d3b41439694978))
+
 #### 2.6.1 (2019-06-10)
 
 ##### Bug Fixes
