@@ -5,7 +5,7 @@
     "url": "https://fra.nkl.in"
   },
   "name": "dotest",
-  "version": "2.6.1",
+  "version": "2.6.2",
   "description": "One dev dependency to run ESLint, your test.js, coverage and report to Coveralls.io",
   "main": "index.js",
   "tonicExampleFilename": "example.js",
