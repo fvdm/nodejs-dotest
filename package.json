@@ -27,7 +27,6 @@
     "url": "https://github.com/fvdm/nodejs-dotest/issues"
   },
   "dependencies": {
-    "codacy-coverage": "^3.4.0",
     "coveralls": "^3.1.0",
     "eslint": "^7.0.0",
     "nyc": "^15.0.0"

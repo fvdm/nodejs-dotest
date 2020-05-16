@@ -100,22 +100,5 @@ if [[ "$TRAVIS" == "true" ]]; then
   fi
 fi
 
-# Submit coverage to Codacy
-if [[ -n "$CODACY_PROJECT_TOKEN" ]]; then
-  if [[ -x "$codacyBin" ]]; then
-    cd "$libpath"
-
-    echo
-    echo "Sending coverage report to Codacy..."
-    "$codacyBin" < "$(pwd)/coverage/lcov.info" || result=1
-    echo
-  else
-    result=1
-    echo -e "\033[31mERROR:\033[0m Codacy is not installed"
-    echo "Run 'npm i' to install all dependencies."
-    echo
-  fi
-fi
-
 # All done, return exit status
 exit $result
