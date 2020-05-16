@@ -45,9 +45,7 @@ if [[ -x "$eslintBin" ]]; then
     "$eslintBin" ./lib || result=1
   fi
 
-  if [[ -d ./test ]]; then
-    "$eslintBin" ./test || result=1
-  fi
+  ls test/*.js 1>/dev/null 2>/dev/null && "$eslintBin" ./test/*.js || result=1
 
   echo
 else
