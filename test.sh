@@ -42,10 +42,12 @@ if [[ -x "$eslintBin" ]]; then
   "$eslintBin" *.js || result=1
 
   if [[ -d ./lib ]]; then
-    "$eslintBin" ./lib || result=1
+    "$eslintBin" --no-error-on-unmatched-pattern ./lib/ || result=1
   fi
 
-  ls test/*.js 1>/dev/null 2>/dev/null && "$eslintBin" ./test/*.js || result=1
+  if [[ -d ./test ]]; then
+    "$eslintBin" --no-error-on-unmatched-pattern ./test/ || result=1
+  fi
 
   echo
 else
