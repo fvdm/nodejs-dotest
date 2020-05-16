@@ -1,3 +1,11 @@
+#### 2.7.1 (2020-05-16)
+
+##### Bug Fixes
+
+* **runner:**
+  *  Don't fail eslint on empty subdirs ([fe4957a1](https://github.com/fvdm/nodejs-dotest/commit/fe4957a120b5a46864e9ae4dcda30a5d3756a076))
+  *  Only run ESlint on test/ for js files ([4f83d3dd](https://github.com/fvdm/nodejs-dotest/commit/4f83d3dd83ac1cc7d50b1dfb792e94c121a6b557))
+
 ### 2.7.0 (2020-05-16)
 
 ##### Breaking Changes
