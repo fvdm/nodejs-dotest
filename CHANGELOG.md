@@ -1,3 +1,23 @@
+### 2.7.0 (2020-05-16)
+
+##### Breaking Changes
+
+*  Removed Codacy support ([06ccbcca](https://github.com/fvdm/nodejs-dotest/commit/06ccbccabefe63eb95fea1e2134aa3040bf8a852))
+
+##### Chores
+
+* **package:**
+  *  Minimum node version 10 ([39008707](https://github.com/fvdm/nodejs-dotest/commit/390087076399a5791b15d85cf1e28fd52292213c))
+  *  Update dependencies ([d1f58db7](https://github.com/fvdm/nodejs-dotest/commit/d1f58db7ab80e27771d165a379596ca6112d3905))
+* **dev:**  Update editorconfig ([70025803](https://github.com/fvdm/nodejs-dotest/commit/70025803b4b8f4090e3a83ccfe9f2a606a676632))
+
+##### Tests
+
+* **config:**
+  *  Add OS to Travis config ([f2e1fe4c](https://github.com/fvdm/nodejs-dotest/commit/f2e1fe4cb81238f42c060e29bb7ab2d75e057136))
+  *  Update Travis node versions ([a49d3918](https://github.com/fvdm/nodejs-dotest/commit/a49d39183944c7648ae86109e694cc19c68b922a))
+  *  Modernized Travis config ([2209dab0](https://github.com/fvdm/nodejs-dotest/commit/2209dab01029eb6ab787d82406dc04c7807abc35))
+
 #### 2.6.2 (2019-12-26)
 
 ##### Chores
