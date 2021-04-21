@@ -84,7 +84,7 @@ else
 fi
 
 # Submit coverage to Coveralls.io
-if [[ "$CI" == "true" ]]; then
+if [[ "$TRAVIS" == "true" ]]; then
   if [[ -x "$coverallsBin" ]]; then
     cd "$libpath"
 
