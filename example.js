@@ -4,14 +4,14 @@ const doTest = require ('dotest');
 const app = {
   methodOne: callback => {
     var data = {
-      music: ['song']
+      music: ['song'],
     };
 
     callback (null, data);
   },
   sub: {
-    methodTwo: () => {}
-  }
+    methodTwo: () => {},
+  },
 };
 
 // Check app interface
@@ -20,7 +20,8 @@ doTest.add ('App interface', test => {
     .isFunction ('fail', 'methodOne', app.methodOne)
     .isObject ('fail', 'sub', app.sub)
     .isFunction ('fail', 'sub.methodTwo', app.sub.methodTwo)
-    .done ();
+    .done ()
+  ;
 });
 
 // Check method response
@@ -30,7 +31,8 @@ doTest.add ('App methodOne', test => {
       .isObject ('fail', 'Callback data', data)
       .isArray ('fail', 'data.music', data.music)
       .isNotEmpty ('warn', 'data.music', data.music)
-      .done ();
+      .done ()
+    ;
   });
 });
 

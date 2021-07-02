@@ -27,7 +27,8 @@ doTest.add ('Module interface', () => {
     .isFunction ('fail', '.test.error', test.error)
     .isFunction ('fail', '.test.info', test.info)
     .isFunction ('fail', '.test.exit', test.exit)
-    .done ();
+    .done ()
+  ;
 
   testsDone++;
 });
@@ -42,14 +43,15 @@ doTest.add ('.config()', (test) => {
     .isExactly ('fail', 'argument first', arg && arg.first, true);
 
   obj = doTest.config ({
-    second: true
+    second: true,
   });
 
   test ()
     .isObject ('fail', 'object return', obj)
     .isExactly ('fail', 'object first', obj && obj.first, true)
     .isExactly ('fail', 'object second', obj && obj.second, true)
-    .done ();
+    .done ()
+  ;
 
   testsDone++;
 });
@@ -59,7 +61,8 @@ doTest.add ('test() shortcut', (test) => {
   doTest.test ()
     .isFunction ('fail', 'test', test)
     .isObject ('fail', 'test() return', test ())
-    .done ();
+    .done ()
+  ;
 
   testsDone++;
 });
@@ -77,7 +80,8 @@ doTest.add ('test() .info()', (test) => {
     .info ('-- Long array:')
     .info (process.mainModule.paths)
 
-    .done ();
+    .done ()
+  ;
 
   testsDone++;
 });
@@ -148,7 +152,8 @@ doTest.add ('Methods', (test, fake) => {
     .good ('This is a good message')
     .done (() => {
       doTest.log ('info', 'test() .done() callback');
-    });
+    })
+  ;
 
   /* eslint-enable no-undefined */
 
@@ -161,7 +166,8 @@ doTest.add ('All tests done', (test) => {
 
   test ()
     .isExactly ('fail', 'testsDone', testsDone, doTest.length)
-    .done ();
+    .done ()
+  ;
 });
 
 
