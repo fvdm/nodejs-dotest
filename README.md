@@ -50,21 +50,24 @@ doTest.add ('App methodOne', test => {
 
 // Check promise
 doTest.add ('Promise good', async test => {
-  try {
-    const data = await myPromise();
+  let error;
+  let data;
 
-    test()
-      .isObject ('fail', 'data', data)
-      .done()
-    ;
+  try {
+    data = await myPromise();
   }
   catch (err) {
-    test (err).done();
+    error = err;
   }
+
+  test (error)
+    .isObject ('fail', 'data', data);
+    .done()
+  ;
 });
 
 // Run the tests
-doTest.run();
+doTest.run ();
 ```
 
 **package.json**
@@ -705,12 +708,11 @@ OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
 ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
 
-For more information, please refer to <http://unlicense.org>
+For more information, please refer to <https://unlicense.org>
 
 
 Author
 ------
 
-[Franklin van de Meent](https://frankl.in)
-
-[![Buy me a coffee](https://frankl.in/u/kofi/kofi-readme.png)](https://ko-fi.com/franklin)
+[Franklin](https://fvdm.com)
+| [Buy me a coffee](https://fvdm.com/donating)
