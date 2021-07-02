@@ -5,7 +5,7 @@ One dev dependency for your [Node.js](https://nodejs.org) package to run ESLint,
 your test.js, coverage and report to Coveralls.io when running on Travis CI.
 
 [![npm](https://img.shields.io/npm/v/dotest.svg?maxAge=3600)](https://github.com/fvdm/nodejs-dotest/blob/master/CHANGELOG.md)
-[![Build Status](https://travis-ci.org/fvdm/nodejs-dotest.svg?branch=master)](https://travis-ci.org/fvdm/nodejs-dotest/branches)
+[![Build Status](https://github.com/fvdm/nodejs-dotest/actions/workflows/node.js.yml/badge.svg?branch=master)](https://github.com/fvdm/nodejs-dotest/actions/workflows/node.js.yml)
 [![Coverage Status](https://coveralls.io/repos/github/fvdm/nodejs-dotest/badge.svg?branch=master)](https://coveralls.io/github/fvdm/nodejs-dotest?branch=master)
 
 * It first lists all new commits sinces the last release (tag) with their relative date
