@@ -17,12 +17,12 @@ const lib = require (path.join (__dirname, 'package.json'));
 const counters = {
   fail: 0,
   warn: 0,
-  startTime: Date.now ()
+  startTime: Date.now (),
 };
 
 const config = {
   wait: 0,
-  noConsole: false
+  noConsole: false,
 };
 
 let testFunc;
@@ -35,11 +35,11 @@ let githubRepo = '';
 let githubPR = '';
 
 if (process.env.GIT_REPO_SLUG) {
-  githubRepo = 'https://github.com/' + process.env.GIT_REPO_SLUG;
+  githubRepo = `https://github.com/${process.env.GIT_REPO_SLUG}`
 }
 
 if (String (process.env.TRAVIS_PULL_REQUEST).match (/^\d+$/)) {
-  githubPR = githubRepo + '/pull/' + process.env.TRAVIS_PULL_REQUEST;
+  githubPR = `${githubRepo}/pull/${process.env.TRAVIS_PULL_REQUEST}`;
 }
 
 
@@ -62,7 +62,7 @@ function colorStr (color, str) {
     cyan: '\u001b[36m',
     gray: '\u001b[37m',
     bold: '\u001b[1m',
-    plain: '\u001b[0m'
+    plain: '\u001b[0m',
   };
 
   return colors [color] + str + colors.plain;
@@ -84,7 +84,7 @@ function colorStr (color, str) {
 function log (type, str, dontCount) {
   const types = {
     good: ['green', 'good'],
-    info: ['cyan', 'info']
+    info: ['cyan', 'info'],
   };
 
   if (!str) {
@@ -109,16 +109,18 @@ function log (type, str, dontCount) {
       console.log (colorStr ('red', 'ERROR  ') + str.message + '\n');
       console.dir (str, {
         depth: null,
-        colors: true
+        colors: true,
       });
       break;
     case 'object':
       console.dir (str, {
         depth: null,
-        colors: true
+        colors: true,
       });
       break;
-    case 'plain': console.log (str); break;
+    case 'plain':
+      console.log (str);
+      break;
     default:
       console.log (colorStr (types[type][0], types[type][1]) + '    ' + str);
       break;
@@ -203,7 +205,8 @@ function done (callback) {
 
   if (counters.fail) {
     process.exit (1);
-  } else {
+  }
+  else {
     process.exit (0);
   }
 }
@@ -264,7 +267,7 @@ function getType (input) {
 
 function typeStr (str, noType) {
   const type = getType (str);
-  const doType = !noType ? ' (' + type + ')' : '';
+  const doType = !noType ? ` (${type})` : '';
   const typeMatch = type.match (/(string|boolean|number|date|regexp|array)/);
 
   let length = '';
@@ -273,7 +276,7 @@ function typeStr (str, noType) {
   switch (type) {
     case 'string':
     case 'array':
-      length = ' (' + str.length + ')';
+      length = ` (${str.length})`;
       break;
     case 'object':
     case 'error':
@@ -288,7 +291,7 @@ function typeStr (str, noType) {
   if (type.match (/(object|array)/)) {
     str = util.inspect (str, {
       depth: null,
-      colors: true
+      colors: true,
     });
 
     str = str.replace (/\n/g, ' ');
@@ -308,7 +311,7 @@ function typeStr (str, noType) {
   // parse function
   if (type === 'function') {
     str = util.inspect (str, {
-      colors: true
+      colors: true,
     });
     str += '\u001b[0m';
 
@@ -367,7 +370,8 @@ function output (level, what, result, describe) {
   // describe result
   if (result.state) {
     str += describe.true || typestrGood + ' is ' + describe;
-  } else {
+  }
+  else {
     counters[level]++;
     str += describe.false || typestrFail + ' should be ' + describe;
   }
@@ -389,7 +393,8 @@ function output (level, what, result, describe) {
 function processExit (fromProcess, code) {
   if (counters.fail) {
     process.exit (1);
-  } else {
+  }
+  else {
     process.exit (code || 0);
   }
 }
@@ -464,7 +469,7 @@ unitTests = {
     testLog ('info', 'Exit process');
     processExit (false);
     return unitTests;
-  }
+  },
 };
 
 
@@ -481,7 +486,7 @@ unitTests = {
 unitTests.isError = (level, what, input) => {
   const result = {
     state: getType (input) === 'error',
-    data: input
+    data: input,
   };
 
   output (level, what, result, 'an Error');
@@ -503,7 +508,7 @@ unitTests.isError = (level, what, input) => {
 unitTests.isInstanceOf = (level, what, input, name) => {
   const result = {
     state: false,
-    data: input
+    data: input,
   };
 
   if (typeof input === 'function') {
@@ -528,7 +533,7 @@ unitTests.isInstanceOf = (level, what, input, name) => {
 unitTests.isClass = (level, what, input) => {
   const result = {
     state: false,
-    data: input
+    data: input,
   };
 
   if (typeof input === 'function') {
@@ -553,7 +558,7 @@ unitTests.isClass = (level, what, input) => {
 unitTests.isObject = (level, what, input) => {
   const result = {
     state: getType (input) === 'object',
-    data: input
+    data: input,
   };
 
   output (level, what, result, 'an Object');
@@ -574,7 +579,7 @@ unitTests.isObject = (level, what, input) => {
 unitTests.isArray = (level, what, input) => {
   const result = {
     state: getType (input) === 'array',
-    data: input
+    data: input,
   };
 
   output (level, what, result, 'an Array');
@@ -595,7 +600,7 @@ unitTests.isArray = (level, what, input) => {
 unitTests.isString = (level, what, input) => {
   const result = {
     state: getType (input) === 'string',
-    data: input
+    data: input,
   };
 
   output (level, what, result, 'a String');
@@ -616,7 +621,7 @@ unitTests.isString = (level, what, input) => {
 unitTests.isNumber = (level, what, input) => {
   const result = {
     state: getType (input) === 'number',
-    data: input
+    data: input,
   };
 
   output (level, what, result, 'a Number');
@@ -637,7 +642,7 @@ unitTests.isNumber = (level, what, input) => {
 unitTests.isUndefined = (level, what, input) => {
   const result = {
     state: getType (input) === 'undefined',
-    data: input
+    data: input,
   };
 
   output (level, what, result, 'Undefined');
@@ -658,7 +663,7 @@ unitTests.isUndefined = (level, what, input) => {
 unitTests.isNull = (level, what, input) => {
   const result = {
     state: input === null,
-    data: input
+    data: input,
   };
 
   output (level, what, result, 'Null');
@@ -679,7 +684,7 @@ unitTests.isNull = (level, what, input) => {
 unitTests.isNaN = (level, what, input) => {
   const result = {
     state: isNaN (input),
-    data: input
+    data: input,
   };
 
   output (level, what, result, 'NaN');
@@ -700,7 +705,7 @@ unitTests.isNaN = (level, what, input) => {
 unitTests.isBoolean = (level, what, input) => {
   const result = {
     state: getType (input) === 'boolean',
-    data: input
+    data: input,
   };
 
   output (level, what, result, 'a Boolean');
@@ -721,7 +726,7 @@ unitTests.isBoolean = (level, what, input) => {
 unitTests.isFunction = (level, what, input) => {
   const result = {
     state: getType (input) === 'function',
-    data: input
+    data: input,
   };
 
   output (level, what, result, 'a Function');
@@ -742,7 +747,7 @@ unitTests.isFunction = (level, what, input) => {
 unitTests.isDate = (level, what, input) => {
   const result = {
     state: getType (input) === 'date',
-    data: input
+    data: input,
   };
 
   output (level, what, result, 'a Date');
@@ -766,12 +771,12 @@ unitTests.isExactly = (level, what, one, two) => {
   const typestrTwo = typeStr (two);
   const result = {
     state: one === two,
-    data: two
+    data: two,
   };
 
   const describe = {
     true: 'is exactly ' + typestrTwo,
-    false: typestrOne + ' should be exactly ' + typestrTwo
+    false: typestrOne + ' should be exactly ' + typestrTwo,
   };
 
   output (level, what, result, describe);
@@ -795,12 +800,12 @@ unitTests.isNot = (level, what, one, two) => {
   const typestrTwo = typeStr (two);
   const result = {
     state: one !== two,
-    data: two
+    data: two,
   };
 
   const describe = {
     true: typestrOne + ' is not equal to ' + typestrTwo,
-    false: typestrOne + ' should not be equal to ' + typestrTwo
+    false: typestrOne + ' should not be equal to ' + typestrTwo,
   };
 
   output (level, what, result, describe);
@@ -821,7 +826,7 @@ unitTests.isNot = (level, what, one, two) => {
 unitTests.isRegexp = (level, what, input) => {
   const result = {
     state: getType (input) === 'regexp',
-    data: input
+    data: input,
   };
 
   output (level, what, result, 'a RegExp');
@@ -845,12 +850,12 @@ unitTests.isRegexpMatch = (level, what, input, regex) => {
   const typestrTwo = typeStr (regex);
   const result = {
     state: !!input.match (regex),
-    data: input
+    data: input,
   };
 
   const describe = {
     true: typestrOne + ' is matching ' + typestrTwo,
-    false: typestrOne + ' should be matching ' + typestrTwo
+    false: typestrOne + ' should be matching ' + typestrTwo,
   };
 
   output (level, what, result, describe);
@@ -875,14 +880,14 @@ unitTests.isCondition = (level, what, one, operator, two) => {
   const typestrTwo = typeStr (two);
   const result = {
     state: false,
-    data: two
+    data: two,
   };
 
   const str = typestrOne + ' ' + colorStr ('yellow', operator) + ' ' + typestrTwo;
 
   const describe = {
     true: str,
-    false: str
+    false: str,
   };
 
   switch (operator) {
@@ -912,20 +917,25 @@ unitTests.isEmpty = (level, what, input) => {
   const type = getType (input);
   const result = {
     state: false,
-    data: input
+    data: input,
   };
 
   if (type === 'undefined') {
     result.state = true;
-  } else if (input === null) {
+  }
+  else if (input === null) {
     result.state = true;
-  } else if (type === 'string' && !input) {
+  }
+  else if (type === 'string' && !input) {
     result.state = true;
-  } else if (type === 'object' && !Object.keys (input).length) {
+  }
+  else if (type === 'object' && !Object.keys (input).length) {
     result.state = true;
-  } else if (type === 'array' && !input.length) {
+  }
+  else if (type === 'array' && !input.length) {
     result.state = true;
-  } else if (type === 'error' && !Object.keys (input).length && !input.message) {
+  }
+  else if (type === 'error' && !Object.keys (input).length && !input.message) {
     result.state = true;
   }
 
@@ -948,20 +958,25 @@ unitTests.isNotEmpty = (level, what, input) => {
   const type = getType (input);
   const result = {
     state: true,
-    data: input
+    data: input,
   };
 
   if (type === 'undefined') {
     result.state = false;
-  } else if (input === null) {
+  }
+  else if (input === null) {
     result.state = false;
-  } else if (type === 'string' && !input) {
+  }
+  else if (type === 'string' && !input) {
     result.state = false;
-  } else if (type === 'object' && !Object.keys (input).length) {
+  }
+  else if (type === 'object' && !Object.keys (input).length) {
     result.state = false;
-  } else if (type === 'array' && !input.length) {
+  }
+  else if (type === 'array' && !input.length) {
     result.state = false;
-  } else if (type === 'error' && !Object.keys (input).length && !input.message) {
+  }
+  else if (type === 'error' && !Object.keys (input).length && !input.message) {
     result.state = false;
   }
 
@@ -1016,7 +1031,8 @@ function run (wait) {
     if (githubPR) {
       console.log();
       log ('note', 'GitHub PR:        ' + colorStr ('yellow', githubPR));
-    } else if (pkg.bugs && pkg.bugs.url) {
+    }
+    else if (pkg.bugs && pkg.bugs.url) {
       console.log();
       log ('note', 'Module issues:    ' + colorStr ('yellow', pkg.bugs.url));
     }
@@ -1038,7 +1054,7 @@ function run (wait) {
 function add (label, runner) {
   queue.push ({
     label,
-    runner
+    runner,
   });
 }
 
@@ -1100,5 +1116,5 @@ module.exports = {
   config: setConfig,
   get length () {
     return queue.length;
-  }
+  },
 };
