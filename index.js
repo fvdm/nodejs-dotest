@@ -35,7 +35,7 @@ let githubRepo = '';
 let githubPR = '';
 
 if (process.env.GIT_REPO_SLUG) {
-  githubRepo = `https://github.com/${process.env.GIT_REPO_SLUG}`
+  githubRepo = `https://github.com/${process.env.GIT_REPO_SLUG}`;
 }
 
 if (String (process.env.TRAVIS_PULL_REQUEST).match (/^\d+$/)) {
@@ -140,15 +140,10 @@ function log (type, str, dontCount) {
 
 function doNext (index) {
   const testF = testFunc (index);
+  const count = colorStr ('cyan', (index + 1) + '/' + queue.length);
+  const label = colorStr ('bold', queue [index].label);
 
-  console.log (
-    '\n\n'
-    + colorStr ('cyan', (index + 1) + '/' + queue.length)
-    + '  '
-    + colorStr ('bold', queue [index].label)
-  );
-
-  console.log ();
+  console.log (`\n\n${count}  ${label}\n`);
   queue [index].runner (testF);
 }
 
@@ -181,13 +176,7 @@ function done (callback) {
 
   if (queue [next]) {
     if (next && config.wait) {
-      setTimeout (
-        () => {
-          doNext (next);
-        },
-        config.wait
-      );
-
+      setTimeout (() => doNext (next), config.wait);
       return;
     }
 
