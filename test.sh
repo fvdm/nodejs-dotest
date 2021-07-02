@@ -57,8 +57,14 @@ else
   echo
 fi
 
+# Run test script without coverage
+if [[ ! -z "$DOTEST_NOCOV" ]]; then
+  cd "$libpath"
+  node test.js || result=1
+fi
+
 # Run test script with coverage
-if [[ -x "$nycBin" ]]; then
+if [[ -x "$nycBin" && -z "$DOTEST_NOCOV" ]]; then
   cd "$libpath"
 
   "$nycBin" \
