@@ -1,3 +1,53 @@
+### 2.8.0 (2021-07-03)
+
+##### Chores
+
+* **package:**  Update dependencies ([d996a310](https://github.com/fvdm/nodejs-dotest/commit/d996a310a3c0691d725021a5cf8a0a0a412ac155))
+*  Minor clean up ([9eef68ac](https://github.com/fvdm/nodejs-dotest/commit/9eef68ac8875d9e3b5d8713112169732b7c20170))
+
+##### Documentation Changes
+
+*  Minor clarifications (retry) ([7fef4319](https://github.com/fvdm/nodejs-dotest/commit/7fef4319d4ab37b6b4951433a0d318488fed7d3e))
+*  Minor clarification ([4f1d9d49](https://github.com/fvdm/nodejs-dotest/commit/4f1d9d49c7db2a75a8d32eae8e64e224df576c46))
+*  Clean up markdown ([c6b6a3ea](https://github.com/fvdm/nodejs-dotest/commit/c6b6a3ea38a4f10cad0c364f7f513b588142af3b))
+* **badges:**  Renamed build status ([27e3126f](https://github.com/fvdm/nodejs-dotest/commit/27e3126f928b498dd52c48f7e6c00e33053271df))
+
+##### New Features
+
+*  Added DOTEST_NOCOV flag ([f3917754](https://github.com/fvdm/nodejs-dotest/commit/f3917754b57438e81fc298dc31de019b42e9cca5))
+
+##### Bug Fixes
+
+*  Documentation somehow became binary ([8d3d5d3b](https://github.com/fvdm/nodejs-dotest/commit/8d3d5d3b7dabd757904b1816615668564c20e2a9))
+*  Replace all linebreaks ([392a10a9](https://github.com/fvdm/nodejs-dotest/commit/392a10a922d7c9559a310699f098035ad5973423))
+
+##### Refactors
+
+*  Better skip coverage handling ([fc23a7f7](https://github.com/fvdm/nodejs-dotest/commit/fc23a7f701c3d802e4efc4e75f1a81192e7e54d9))
+*  Minor readability edits ([eaf28ddd](https://github.com/fvdm/nodejs-dotest/commit/eaf28ddd706da3b9576b6ad63e7e6ca30798b7a6))
+* **runner:**  Check for generic CI env ([df53d17a](https://github.com/fvdm/nodejs-dotest/commit/df53d17afea78bc78254547fd75edfdbd80a0817))
+
+##### Code Style Changes
+
+*  More syntax clean up ([4ac28ffb](https://github.com/fvdm/nodejs-dotest/commit/4ac28ffbc792762f52b8867c08223fd9d18901ea))
+*  Minor lint and syntax changes ([8aadfde9](https://github.com/fvdm/nodejs-dotest/commit/8aadfde90038732a29570387fef9a7ea3a3649e5))
+
+##### Tests
+
+* **config:**
+  *  CodeQL checkout version ([b1d42468](https://github.com/fvdm/nodejs-dotest/commit/b1d424684f5ba0160cf40421e1d864da904c7baf))
+  *  Fixed syntax typo ([89493cb9](https://github.com/fvdm/nodejs-dotest/commit/89493cb971c89ac978f0aa3e21bf1289b3cd057b))
+  *  CodeQL permission error ([7d8c65ec](https://github.com/fvdm/nodejs-dotest/commit/7d8c65ec0320dc93987d2e288149a8d04c6b6ef4))
+  *  Replaced Travis with Github actions ([2ae07d12](https://github.com/fvdm/nodejs-dotest/commit/2ae07d122ea4ba98d75e11e1ecfa0b24f6fd9ce9))
+  *  Modernized ESlint config ([323d2d26](https://github.com/fvdm/nodejs-dotest/commit/323d2d26129e89f54c2ae73303462ddf0e72080c))
+* **github:**
+  *  Removed actions ([e06a8cd9](https://github.com/fvdm/nodejs-dotest/commit/e06a8cd9c9e011290b2a6ac3d4d0960cf79c178f))
+  *  Lowercase action name build.yml ([bae2db54](https://github.com/fvdm/nodejs-dotest/commit/bae2db54cbc6778a79cae6606c1b2f6a63201605))
+  *  Renamed node.js.yml to build.yml ([8e61792b](https://github.com/fvdm/nodejs-dotest/commit/8e61792b9ae0d1467b8a363426d4672b8d1927a2))
+  *  Renamed CI action to Build ([4e723788](https://github.com/fvdm/nodejs-dotest/commit/4e72378810a32d6b7a05a58f978d7ed59dd4a1af))
+* **runner:**  Undo generic CI check ([c463ac8a](https://github.com/fvdm/nodejs-dotest/commit/c463ac8ab8c6a863619d9bb203db7372ba4390bd))
+*  Replaced Travis CI with Github actions ([fbcd7f47](https://github.com/fvdm/nodejs-dotest/commit/fbcd7f475981290eb232a4bd4a1afd40fefe4bc2))
+
 #### 2.7.1 (2020-05-16)
 
 ##### Bug Fixes
