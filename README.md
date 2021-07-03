@@ -1,5 +1,4 @@
-dotest
-======
+# dotest
 
 One dev dependency for your [Node.js](https://nodejs.org) package to run ESLint,
 your test.js, coverage and report to Coveralls.io when running on Travis CI.
@@ -16,8 +15,7 @@ your test.js, coverage and report to Coveralls.io when running on Travis CI.
 [![Console example](https://fvdm.com/wp-content/uploads/2016/05/nodejs_dotest_example-340x400.png)](https://fvdm.com/micro/nodejs-dotest-console-output)
 
 
-Example
--------
+## Example
 
 **test.js**
 
@@ -75,33 +73,31 @@ doTest.run ();
 Full test including ESLint, test.js, coverage report and Coveralls.io submit.
 
 ```json
-  "scripts": {
-    "test": "dotest"
-  }
+"scripts": {
+  "test": "dotest"
+}
 ```
 
 Or just run your `test.js`
 
 ```json
-  "scripts": {
-    "test": "node test.js"
-  }
+"scripts": {
+  "test": "node test.js"
+}
 ```
 
 
 Just run `npm test`
 
 
-Installation
-------------
+## Installation
 
 This is usually intended for CI builds, so best to make sure it's in your dev dependencies ;)
 
 `npm i dotest --save-dev`
 
 
-Configuration
--------------
+## Configuration
 
 The script takes these env variables. They override the code settings.
 
@@ -112,32 +108,33 @@ name           | default | description
 [DOTEST_NOCOV] |         | Skip coverage report. Leave empty for false.
 
 
-.add
-----
+## Methods
+
+### add
 **( label, testFunction )**
 
 Add a new test to the queue.
 
 
 ```js
-doTest.add ('App interface', function (test) {
+doTest.add ('App interface', test => {
   test()
     .isArray ('fail', 'my array', [])
-    .done();
+    .done()
+  ;
 });
 ```
 
 
-.run
-----
+### run
 **( [wait] )**
 
 Run the tests from the queue, one by one.
 
 
-param | type   | required | default | description
+param | type   | default | description
 :-----|:-------|:---------|:--------|:-----------
-wait  | int    | no       | 0       | Wait time between tests in ms (1000 = 1 sec)
+wait  | int    |0       | Wait time between tests in ms (1000 = 1 sec)
 
 
 ```js
@@ -149,8 +146,7 @@ doTest.run (2000);
 ```
 
 
-.log
-----
+### log
 **( [type], str, [dontCount] )**
 
 Fancy `console.log` with style.
@@ -184,8 +180,7 @@ doTest.log ('note', 'Hello world');
 ```
 
 
-.exit
------
+### exit
 **( )**
 
 Force exit the process, after writing statistics to the console.
@@ -195,8 +190,7 @@ doTest.exit();
 ```
 
 
-.test
------
+### test
 **( [err] )**
 
 Returns check functions.
@@ -211,23 +205,24 @@ You can concat the check functions for clean code.
 
 ```js
 // Using the method
-doTest.add ('App interface', function() {
+doTest.add ('App interface', () => {
   doTest.test()
     .isObject ('fail', 'Callback data', data)
-    .done();
+    .done()
+  ;
 });
 
 // Or using the shortcut
-doTest.add ('App interface', function (test) {
+doTest.add ('App interface', test => {
   test()
     .isObject ('fail', 'Callback data', data)
-    .done();
+    .done()
+  ;
 });
 ```
 
 
-test() .done
-------------
+### test() .done
 **( [callback] )**
 
 Run the next test from the queue.
@@ -236,8 +231,7 @@ Optionally run a `callback` function before the next test.
 See example above.
 
 
-test() .exit
-------------
+### test() .exit
 **( )**
 
 Alias to [dotest.exit()](#exit).
@@ -247,12 +241,12 @@ but `.exit()` also ends the whole script.
 ```js
 test()
   .isArray ('fail', 'data', [])
-  .exit();
+  .exit()
+;
 ```
 
 
-test() .info
-------------
+### test() .info
 **( message )**
 
 Output 'info' log line.
@@ -264,7 +258,8 @@ and the full value of `message` dumped right below.
 ```js
 test()
   .info ({ hello: 'world' })
-  .done();
+  .done()
+;
 
 // Output:
 // info    Object
@@ -272,8 +267,7 @@ test()
 ```
 
 
-test() .good
-------------
+### test() .good
 **( message )**
 
 Output 'good' log line.
@@ -285,15 +279,15 @@ and the full value of `message` dumped right below.
 ```js
 test()
   .good ('It works great')
-  .done();
+  .done()
+;
 
 // Output:
 // good    It works great
 ```
 
 
-test() .warn
-------------
+### test() .warn
 **( message )**
 
 Output 'warn' log line.
@@ -305,15 +299,15 @@ and the full value of `message` dumped right below.
 ```js
 test()
   .warn ('Hmm something odd happened')
-  .done();
+  .done()
+;
 
 // Output:
 // warn    Hmm something odd happend
 ```
 
 
-test() .fail
-------------
+### test() .fail
 **( message, [dontCount] )**
 
 Output 'FAIL' log line.
@@ -325,15 +319,15 @@ and the full value of `message` dumped right below.
 ```js
 test()
   .fail ('We have a problem')
-  .done();
+  .done()
+;
 
 // Output:
 // FAIL    We have a problem
 ```
 
 
-test() .error
--------------
+### test() .error
 **( err, [dontCount] )**
 
 Output 'ERROR' log line with dump and stack trace.
@@ -343,7 +337,8 @@ const err = new Error ('Oops');
 
 test()
   .error (err)
-  .done();
+  .done()
+;
 
 // Output:
 // ERROR   Oops
@@ -353,234 +348,233 @@ test()
 ```
 
 
-test() .isError
----------------
+### test() .isError
 **( level, what, input )**
 
 Check if `input` is an instance of _Error_.
 
 
-param | type   | required | description
-:-----|:-------|:---------|:-------------------------------
-level | string | yes      | Either `fail` or `warn`
-what  | string | yes      | Text to prepend to check result
-input | mixed  | yes      | The variable to check
+param | type   | description
+:-----|:-------|:-----------
+level | string | Either `fail` or `warn`
+what  | string | Text to prepend to check result
+input | mixed  | The variable to check
 
 
 ```js
 test()
   .isError ('fail', 'My data', data)
-  .done();
+  .done()
+;
 ```
 
 
-test() .isObject
-----------------
+### test() .isObject
 **( level, what, input )**
 
 Check if `input` is an instance of _Object_.
 
 
-param | type   | required | description
-:-----|:-------|:---------|:-------------------------------
-level | string | yes      | Either `fail` or `warn`
-what  | string | yes      | Text to prepend to check result
-input | mixed  | yes      | The variable to check
+param | type   | description
+:-----|:-------|:-----------
+level | string | Either `fail` or `warn`
+what  | string | Text to prepend to check result
+input | mixed  | The variable to check
 
 
 ```js
 test()
   .isObject ('fail', 'My data', data)
-  .done();
+  .done()
+;
 ```
 
 
-test() .isArray
----------------
+### test() .isArray
 **( level, what, input )**
 
 Check if `input` is an instance of _Array_.
 
 
-param | type   | required | description
-:-----|:-------|:---------|:-------------------------------
-level | string | yes      | Either `fail` or `warn`
-what  | string | yes      | Text to prepend to check result
-input | mixed  | yes      | The variable to check
+param | type   | description
+:-----|:-------|:-----------
+level | string |Either `fail` or `warn`
+what  | string |Text to prepend to check result
+input | mixed  |The variable to check
 
 
 ```js
 test()
   .isArray ('fail', 'My data', data)
-  .done();
+  .done()
+;
 ```
 
 
-test() .isString
-----------------
+### test() .isString
 **( level, what, input )**
 
 Check if `input` is a _string_.
 
 
-param | type   | required | description
-:-----|:-------|:---------|:-------------------------------
-level | string | yes      | Either `fail` or `warn`
-what  | string | yes      | Text to prepend to check result
-input | mixed  | yes      | The variable to check
+param | type   | description
+:-----|:-------|:-----------
+level | string |Either `fail` or `warn`
+what  | string |Text to prepend to check result
+input | mixed  |The variable to check
 
 
 ```js
 test()
   .isString ('fail', 'My data', data)
-  .done();
+  .done()
+;
 ```
 
 
-test() .isNumber
-----------------
+### test() .isNumber
 **( level, what, input )**
 
 Check if `input` is a _number_.
 
 
-param | type   | required | description
-:-----|:-------|:---------|:-------------------------------
-level | string | yes      | Either `fail` or `warn`
-what  | string | yes      | Text to prepend to check result
-input | mixed  | yes      | The variable to check
+param | type   | description
+:-----|:-------|:-----------
+level | string |Either `fail` or `warn`
+what  | string |Text to prepend to check result
+input | mixed  |The variable to check
 
 
 ```js
 test()
   .isNumber ('fail', 'My data', data)
-  .done();
+  .done()
+;
 ```
 
 
-test() .isUndefined
--------------------
+### test() .isUndefined
 **( level, what, input )**
 
 Check if `input` is _undefined_.
 
 
-param | type   | required | description
-:-----|:-------|:---------|:-------------------------------
-level | string | yes      | Either `fail` or `warn`
-what  | string | yes      | Text to prepend to check result
-input | mixed  | yes      | The variable to check
+param | type   | description
+:-----|:-------|:-----------
+level | string |Either `fail` or `warn`
+what  | string |Text to prepend to check result
+input | mixed  |The variable to check
 
 
 ```js
 function (err, data) {
   test()
     .isUndefined ('warn', 'My data', data)
-    .done();
+    .done()
+  ;
 }
 ```
 
 
-test() .isNull
---------------
+### test() .isNull
 **( level, what, input )**
 
 Check if `input` is _null_.
 
 
-param | type   | required | description
-:-----|:-------|:---------|:-------------------------------
-level | string | yes      | Either `fail` or `warn`
-what  | string | yes      | Text to prepend to check result
-input | mixed  | yes      | The variable to check
+param | type   | description
+:-----|:-------|:-----------
+level | string |Either `fail` or `warn`
+what  | string |Text to prepend to check result
+input | mixed  |The variable to check
 
 
 ```js
 function (err, data) {
   test()
     .isNull ('warn', 'My data', data)
-    .done();
+    .done()
+  ;
 }
 ```
 
 
-test() .isNaN
--------------
+### test() .isNaN
 **( level, what, input )**
 
 Check if `input` is _NaN_.
 
 
-param | type   | required | description
-:-----|:-------|:---------|:-------------------------------
-level | string | yes      | Either `fail` or `warn`
-what  | string | yes      | Text to prepend to check result
-input | mixed  | yes      | The variable to check
+param | type   | description
+:-----|:-------|:-----------
+level | string |Either `fail` or `warn`
+what  | string |Text to prepend to check result
+input | mixed  |The variable to check
 
 
 ```js
 function (err, data) {
   test()
     .isNaN ('warn', 'My data', data)
-    .done();
+    .done()
+  ;
 }
 ```
 
 
-test() .isBoolean
------------------
+### test() .isBoolean
 **( level, what, input )**
 
 Check if `input` is a _boolean_.
 
 
-param | type   | required | description
-:-----|:-------|:---------|:-------------------------------
-level | string | yes      | Either `fail` or `warn`
-what  | string | yes      | Text to prepend to check result
-input | mixed  | yes      | The variable to check
+param | type   | description
+:-----|:-------|:-----------
+level | string |Either `fail` or `warn`
+what  | string |Text to prepend to check result
+input | mixed  |The variable to check
 
 
 ```js
 test()
   .isBoolean ('fail', 'My data', data)
-  .done();
+  .done()
+;
 ```
 
 
-test() .isFunction
-------------------
+### test() .isFunction
 **( level, what, input )**
 
 Check if `input` is an instance of _Function_.
 
 
-param | type   | required | description
-:-----|:-------|:---------|:-------------------------------
-level | string | yes      | Either `fail` or `warn`
-what  | string | yes      | Text to prepend to check result
-input | mixed  | yes      | The variable to check
+param | type   | description
+:-----|:-------|:-----------
+level | string |Either `fail` or `warn`
+what  | string |Text to prepend to check result
+input | mixed  |The variable to check
 
 
 ```js
 test()
   .isFunction ('fail', 'My data', data)
-  .done();
+  .done()
+;
 ```
 
 
-test() .isDate
---------------
+### test() .isDate
 **( level, what, input )**
 
 Check if `input` is an instance of _Date_.
 
 
-param | type   | required | description
-:-----|:-------|:---------|:-------------------------------
-level | string | yes      | Either `fail` or `warn`
-what  | string | yes      | Text to prepend to check result
-input | mixed  | yes      | The variable to check
+param | type   | description
+:-----|:-------|:-----------
+level | string |Either `fail` or `warn`
+what  | string |Text to prepend to check result
+input | mixed  |The variable to check
 
 
 ```js
@@ -588,44 +582,44 @@ const myDate = new Date();
 
 test()
   .isDate ('fail', 'My data', myDate)
-  .done();
+  .done()
+;
 ```
 
 
-test() .isExactly
------------------
+### test() .isExactly
 **( level, what, one, two )**
 
 Check if `one` is exactly of the same type and value as `two`.
 
 
-param | type   | required | description
-:-----|:-------|:---------|:-------------------------------
-level | string | yes      | Either `fail` or `warn`
-what  | string | yes      | Text to prepend to check result
-one   | mixed  | yes      | The variable to check
-two   | mixed  | yes      | The variable to check against
+param | type   | description
+:-----|:-------|:-----------
+level | string |Either `fail` or `warn`
+what  | string |Text to prepend to check result
+one   | mixed  |The variable to check
+two   | mixed  |The variable to check against
 
 
 ```js
 test()
   .isExactly ('fail', 'My data', 'foo', 'bar')
-  .done();
+  .done()
+;
 ```
 
 
-test() .isCondition
--------------------
+### test() .isCondition
 **( level, what, one, operator, two )**
 
 Check if the two values meet the condition.
 
 
-param    | type   | required | description
-:--------|:-------|:---------|:-------------------------------
-level    | string | yes      | Either `fail` or `warn`
-what     | string | yes      | Text to prepend to check result
-one      | mixed  | yes      | Variable to test against
+param    | type   | description
+:--------|:-------|:-----------
+level    | string |Either `fail` or `warn`
+what     | string |Text to prepend to check result
+one      | mixed  |Variable to test against
 operator | string |          | `<`, `>`, `<=`, `>=`
 two      | mixed  |          | Variable to test against
 
@@ -633,58 +627,58 @@ two      | mixed  |          | Variable to test against
 ```js
 test()
   .isCondition ('fail', 'My data', 1, '<', 2)
-  .done();
+  .done()
+;
 ```
 
 
-test() .isEmpty
----------------
+### test() .isEmpty
 **( level, what, input )**
 
 Check if `input` is _undefined_, _null_, or an empty _string_, _object_, _array_ or _Error_.
 In case of _Error_ the `input.message` and `Object.keys (input)` are checked.
 
 
-param | type   | required | description
-:-----|:-------|:---------|:-------------------------------
-level | string | yes      | Either `fail` or `warn`
-what  | string | yes      | Text to prepend to check result
-input | mixed  | yes      | The variable to check
+param | type   | description
+:-----|:-------|:-----------
+level | string |Either `fail` or `warn`
+what  | string |Text to prepend to check result
+input | mixed  |The variable to check
 
 
 ```js
 // Object is empty
 test()
   .isEmpty ('fail', 'My data', {})
-  .done();
+  .done()
+;
 ```
 
 
-test() .isNotEmpty
-------------------
+### test() .isNotEmpty
 **( level, what, input )**
 
 Check if `input` is not _undefined_, _null_, or an empty _string_, _object_, _array_ or _Error_.
 In case of _Error_ the `input.message` and `Object.keys (input)` are checked.
 
 
-param | type   | required | description
-:-----|:-------|:---------|:-------------------------------
-level | string | yes      | Either `fail` or `warn`
-what  | string | yes      | Text to prepend to check result
-input | mixed  | yes      | The variable to check
+param | type   | description
+:-----|:-------|:-----------
+level | string |Either `fail` or `warn`
+what  | string |Text to prepend to check result
+input | mixed  |The variable to check
 
 
 ```js
 // Object is not empty
 test()
   .isNotEmpty ('fail', 'My data', { foo: 'bar' })
-  .done();
+  .done()
+;
 ```
 
 
-Unlicense
----------
+## Unlicense
 
 This is free and unencumbered software released into the public domain.
 
@@ -712,8 +706,7 @@ OTHER DEALINGS IN THE SOFTWARE.
 For more information, please refer to <https://unlicense.org>
 
 
-Author
-------
+## Author
 
 [Franklin](https://fvdm.com)
 | [Buy me a coffee](https://fvdm.com/donating)
