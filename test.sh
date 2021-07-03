@@ -6,6 +6,11 @@ eslintBin="$nodebin/eslint"
 nycBin="$nodebin/nyc"
 coverallsBin="$nodebin/coveralls"
 codacyBin="$nodebin/codacy-coverage"
+skipCoverage=$DOTEST_NOCOV
+
+if [[ -z "$skipCoverage" ]]; then
+  skipCoverage=false
+fi
 
 export GIT_REPO_SLUG="$TRAVIS_REPO_SLUG"
 
@@ -35,7 +40,6 @@ git log $lastTag..HEAD \
 echo
 echo
 
-
 # ESLint
 if [[ -x "$eslintBin" ]]; then
   echo "Running ESLint..."
@@ -58,7 +62,7 @@ else
 fi
 
 # Run test script without coverage
-if [[ ! -z "$DOTEST_NOCOV" ]]; then
+if [[ "$skipCoverage" == "true" ]]; then
   cd "$libpath"
   node test.js || result=1
 fi

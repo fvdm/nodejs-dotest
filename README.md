@@ -104,8 +104,8 @@ The script takes these env variables. They override the code settings.
 
 name           | default | description
 :--------------|:--------|:-----------
-[DOTEST_WAIT]  | 0       | Pause between tests, in ms (1000 = 1 sec)
-[DOTEST_NOCOV] |         | Skip coverage report. Leave empty for false.
+[DOTEST_WAIT]  | 0       | Pause N ms between tests.
+[DOTEST_NOCOV] | false   | Set to `true` to skip coverage report.
 
 
 ## Methods
