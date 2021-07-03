@@ -7,12 +7,14 @@ Feedback:       https://github.com/fvdm/nodejs-dotest/issues
 License:        Unlicense (public domain, see LICENSE file)
 */
 
-const path = require ('path');
-const util = require ('util');
-const dir = path.parse (process.mainModule.filename)
-  .dir.replace (/\/(lib|test)$/, '');
-const pkg = require (path.join (dir, 'package.json'));
-const lib = require (path.join (__dirname, 'package.json'));
+const { parse, join } = require ('path');
+const { inspect } = require ('util');
+let { dir } = parse (process.mainModule.filename);
+
+dir = dir.replace (/\/(lib|test)$/, '');
+
+const pkg = require (join (dir, 'package.json'));
+const lib = require (join (__dirname, 'package.json'));
 
 const counters = {
   fail: 0,
@@ -278,7 +280,7 @@ function typeStr (str, noType) {
 
   // parse special
   if (type.match (/(object|array)/)) {
-    str = util.inspect (str, {
+    str = inspect (str, {
       depth: null,
       colors: true,
     });
@@ -299,7 +301,7 @@ function typeStr (str, noType) {
 
   // parse function
   if (type === 'function') {
-    str = util.inspect (str, {
+    str = inspect (str, {
       colors: true,
     });
     str += '\u001b[0m';
