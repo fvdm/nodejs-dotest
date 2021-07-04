@@ -88,6 +88,23 @@ elif [[ -x "$nycBin" ]]; then
   --reporter=text \
   node test.js || result=1
 
+  # Submit coverage to Coveralls.io
+  if [[ "$TRAVIS" == "true" ]]; then
+    if [[ -x "$coverallsBin" ]]; then
+      cd "$libpath"
+
+      echo
+      echo "Sending coverage report to Coveralls..."
+      "$coverallsBin" < "$(pwd)/coverage/lcov.info" || result=1
+      echo
+    else
+      result=1
+      echo -e "\033[31mERROR:\033[0m Coveralls is not installed"
+      echo "Run 'npm i' to install all dependencies."
+      echo
+    fi
+  fi
+
 # Coverage tool 'nyc' not availablw
 else
 
@@ -96,23 +113,6 @@ else
   echo "Run 'npm i' to install all dependencies."
   echo
 
-fi
-
-# Submit coverage to Coveralls.io
-if [[ "$TRAVIS" == "true" ]]; then
-  if [[ -x "$coverallsBin" ]]; then
-    cd "$libpath"
-
-    echo
-    echo "Sending coverage report to Coveralls..."
-    "$coverallsBin" < "$(pwd)/coverage/lcov.info" || result=1
-    echo
-  else
-    result=1
-    echo -e "\033[31mERROR:\033[0m Coveralls is not installed"
-    echo "Run 'npm i' to install all dependencies."
-    echo
-  fi
 fi
 
 # All done, return exit status
