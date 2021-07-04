@@ -63,12 +63,13 @@ fi
 
 # Run test script without coverage
 if [[ "$skipCoverage" == "true" ]]; then
+
   cd "$libpath"
   node test.js || result=1
-fi
 
 # Run test script with coverage
-if [[ -x "$nycBin" && -z "$DOTEST_NOCOV" ]]; then
+elif [[ -x "$nycBin" ]]; then
+
   cd "$libpath"
 
   "$nycBin" \
@@ -86,11 +87,15 @@ if [[ -x "$nycBin" && -z "$DOTEST_NOCOV" ]]; then
   --reporter=lcov \
   --reporter=text \
   node test.js || result=1
+
+# Coverage tool 'nyc' not availablw
 else
+
   result=1
   echo -e "\033[31mERROR:\033[0m nyc is not installed"
   echo "Run 'npm i' to install all dependencies."
   echo
+
 fi
 
 # Submit coverage to Coveralls.io
