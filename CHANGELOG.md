@@ -1,3 +1,9 @@
+#### 2.8.2 (2021-07-04)
+
+##### Bug Fixes
+
+* **runner:**  Skip coverage broke the test ([b5ada970](https://github.com/fvdm/nodejs-dotest/commit/b5ada970580c49fdefa2ade54d3a57104ddcde8c))
+
 #### 2.8.1 (2021-07-04)
 
 ##### Bug Fixes
