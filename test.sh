@@ -80,6 +80,7 @@ elif [[ -x "$nycBin" ]]; then
   --functions=85 \
   --statements=85 \
   --all \
+  --exclude='**/test.js' \
   --exclude='**/example.js' \
   --exclude='**/coverage/**' \
   --exclude='**/packages/**' \
