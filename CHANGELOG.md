@@ -1,3 +1,9 @@
+### 2.9.0 (2021-07-16)
+
+##### Refactors
+
+* **runner:**  Exclude test.js in coverage ([e8f84592](https://github.com/fvdm/nodejs-dotest/commit/e8f845929c3d2a6c3d270a83be8744a140dbd5f4))
+
 #### 2.8.2 (2021-07-04)
 
 ##### Bug Fixes
