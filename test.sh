@@ -7,9 +7,14 @@ nycBin="$nodebin/nyc"
 coverallsBin="$nodebin/coveralls"
 codacyBin="$nodebin/codacy-coverage"
 skipCoverage=$DOTEST_NOCOV
+minimalCoverage=$DOTEST_MINCOV
 
 if [[ -z "$skipCoverage" ]]; then
   skipCoverage=false
+fi
+
+if [[ -z "$minimalCoverage" ]]; then
+  minimalCoverage=85
 fi
 
 export GIT_REPO_SLUG="$TRAVIS_REPO_SLUG"
@@ -75,10 +80,10 @@ elif [[ -x "$nycBin" ]]; then
   "$nycBin" \
   --clean \
   --check-coverage \
-  --branches=85 \
-  --lines=85 \
-  --functions=85 \
-  --statements=85 \
+  --branches=$minimalCoverage \
+  --lines=$minimalCoverage \
+  --functions=$minimalCoverage \
+  --statements=$minimalCoverage \
   --all \
   --exclude='**/test.js' \
   --exclude='**/example.js' \
@@ -106,7 +111,7 @@ elif [[ -x "$nycBin" ]]; then
     fi
   fi
 
-# Coverage tool 'nyc' not availablw
+# Coverage tool 'nyc' not available
 else
 
   result=1
