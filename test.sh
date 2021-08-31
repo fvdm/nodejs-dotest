@@ -23,8 +23,6 @@ if [ "$GIT_REPO_SLUG" == "" ]; then
   export GIT_REPO_SLUG=$(git ls-remote --get-url | sed 's/.*[\/|@]github.com[:\/]\(.*\).git/\1/')
 fi
 
-repourl="https://github.com/$GIT_REPO_SLUG"
-
 # ESLint
 if [[ -x "$eslintBin" ]]; then
   echo "Running ESLint..."
