@@ -7,8 +7,7 @@ your test.js, coverage and report to Coveralls.io when running on Travis CI.
 [![Build Status](https://github.com/fvdm/nodejs-dotest/actions/workflows/node.js.yml/badge.svg?branch=master)](https://github.com/fvdm/nodejs-dotest/actions/workflows/node.js.yml)
 [![Coverage Status](https://coveralls.io/repos/github/fvdm/nodejs-dotest/badge.svg?branch=master)](https://coveralls.io/github/fvdm/nodejs-dotest?branch=master)
 
-* It first lists all new commits sinces the last release (tag) with their relative date
-* Then runs ESLint with your package's `.eslintrc` config
+* It runs ESLint with your package's `.eslintrc` config
 * Finally it runs your `test.js` with `nyc` for coverage
 * When it detects Travis CI it will also submit the coverage report to [Coveralls.io](https://coveralls.io)
 

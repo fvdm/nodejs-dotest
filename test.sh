@@ -25,25 +25,6 @@ fi
 
 repourl="https://github.com/$GIT_REPO_SLUG"
 
-# List commits since last release
-thisTag=$(git describe --tags --abbrev=0)
-lastTag=$(git describe --tags --abbrev=0 HEAD^)
-
-if [ "$thisTag" == "$lastTag" ]; then
-  thisTag="HEAD"
-fi
-
-echo "Commits since $lastTag to $thisTag"
-echo
-echo "$repourl/compare/$lastTag...$thisTag"
-echo
-git log $lastTag..HEAD \
-  --oneline \
-  --pretty=format:'%C(green)%h%Creset -%C(red)%d%Creset %C(yellow)%s%Creset %C(blue)(%cr)' \
-  --abbrev-commit
-echo
-echo
-
 # ESLint
 if [[ -x "$eslintBin" ]]; then
   echo "Running ESLint..."
