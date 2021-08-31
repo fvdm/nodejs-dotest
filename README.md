@@ -101,10 +101,11 @@ This is usually intended for CI builds, so best to make sure it's in your dev de
 The script takes these env variables. They override the code settings.
 
 
-name           | default | description
-:--------------|:--------|:-----------
-[DOTEST_WAIT]  | 0       | Pause N ms between tests
-[DOTEST_NOCOV] |         | Set to 'true' to skip coverage report
+name            | default | description
+:---------------|:--------|:-----------
+[DOTEST_WAIT]   | 0       | Pause N ms between tests
+[DOTEST_NOCOV]  |         | Set to 'true' to skip coverage report
+[DOTEST_MINCOV] | 85      | Minimum required coverage percentage
 
 
 ## Methods
