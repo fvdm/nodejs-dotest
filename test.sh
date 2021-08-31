@@ -5,7 +5,6 @@ nodebin="$libpath/node_modules/.bin"
 eslintBin="$nodebin/eslint"
 nycBin="$nodebin/nyc"
 coverallsBin="$nodebin/coveralls"
-codacyBin="$nodebin/codacy-coverage"
 skipCoverage=$DOTEST_NOCOV
 minimalCoverage=$DOTEST_MINCOV
 
