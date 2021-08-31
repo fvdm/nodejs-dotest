@@ -1,3 +1,22 @@
+### 2.10.0 (2021-08-31)
+
+##### Documentation Changes
+
+*  Added DOTEST_MINCOV env var ([e46cf394](https://github.com/fvdm/nodejs-dotest/commit/e46cf394bcb583775e18137b53086092d18598da))
+
+##### New Features
+
+* **runner:**  Add minimal coverage env var ([a11df33f](https://github.com/fvdm/nodejs-dotest/commit/a11df33fad984427e8e2b1d0685ccd268b87be1e))
+
+##### Refactors
+
+*  Removed commits listing ([690be2c6](https://github.com/fvdm/nodejs-dotest/commit/690be2c66dd7d65efb965c801490f84e254de807))
+
+##### Code Style Changes
+
+* **runner:**  Removed obsolete repourl var ([54887707](https://github.com/fvdm/nodejs-dotest/commit/54887707d5e5e7ac82fd7304173ed9847cf74fbd))
+*  Minor clean up ([0321b57a](https://github.com/fvdm/nodejs-dotest/commit/0321b57a55b8884d7bf80461711b1e5199c6eb28))
+
 ### 2.9.0 (2021-07-16)
 
 ##### Refactors
