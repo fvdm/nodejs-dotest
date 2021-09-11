@@ -40,6 +40,7 @@ jobs:
       - run: npm audit --production
       - name: Coveralls Parallel
         uses: coverallsapp/github-action@master
+        if: always()
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           flag-name: node-${{ matrix.node-version }}
@@ -55,6 +56,7 @@ jobs:
   finish:
     name: "Finish"
     needs: build
+    if: always()
     runs-on: ubuntu-latest
     steps:
       - name: Coveralls Finished
