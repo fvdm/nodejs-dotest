@@ -42,6 +42,13 @@ jobs:
         flag-name: node-${{ matrix.node-version }}
         parallel: true
 
+  good_build:
+    name: "Good build"
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Build was sucessfull"
+
   finish:
     name: "Finish"
     needs: build
