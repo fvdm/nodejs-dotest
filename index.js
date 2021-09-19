@@ -98,7 +98,7 @@ function log (type, str, dontCount) {
         break;
 
       case 'info':
-        console.log ('::notice file=test.js::' + str);
+        console.log (colorStr ('cyan', 'info') + '    ' + str);
         break;
 
       case 'note':
