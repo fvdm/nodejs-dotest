@@ -138,7 +138,6 @@ function log (type, str, dontCount) {
     }
   }
 
-/* eslint-enable complexity */
   // Normal log output
   else {
     switch (type) {
@@ -302,6 +301,7 @@ function getType (input) {
 }
 
 
+/* eslint-disable complexity */
 
 /**
  * Get formatted let type for console
@@ -375,6 +375,8 @@ function typeStr (str, noType) {
   return colorStr ('magenta', type) + length;
 }
 
+
+/* eslint-disable complexity */
 
 /**
  * Write test result to console
