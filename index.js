@@ -25,7 +25,7 @@ const counters = {
 const config = {
   wait: 0,
   noConsole: false,
-  isAction: process.env.CI === 'true' && process.env.GITHUB_WORKFLOW;
+  isAction: process.env.CI === 'true' && process.env.GITHUB_WORKFLOW,
 };
 
 let testFunc;
