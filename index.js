@@ -25,6 +25,7 @@ const counters = {
 const config = {
   wait: 0,
   noConsole: false,
+  isAction: process.env.CI === 'true' && process.env.GITHUB_WORKFLOW;
 };
 
 let testFunc;
@@ -84,52 +85,108 @@ function colorStr (color, str) {
  */
 
 function log (type, str, dontCount) {
-  const types = {
-    good: ['green', 'good'],
-    info: ['cyan', 'info'],
-  };
-
   if (!str) {
     str = type;
     type = 'plain';
   }
 
-  switch (type) {
-    case 'note':
-      console.log (colorStr ('bold', str));
-      break;
-    case 'fail':
-      if (!dontCount) { counters.fail++; }
-      console.log (colorStr ('red', 'FAIL') + '    ' + str);
-      break;
-    case 'warn':
-      counters.warn++;
-      console.log (colorStr ('yellow', 'warn') + '    ' + str);
-      break;
-    case 'error':
-      if (!dontCount) { counters.fail++; }
-      console.log (colorStr ('red', 'ERROR  ') + str.message + '\n');
-      console.dir (str, {
-        depth: null,
-        colors: true,
-      });
-      break;
-    case 'object':
-      console.dir (str, {
-        depth: null,
-        colors: true,
-      });
-      break;
-    case 'plain':
-      console.log (str);
-      break;
-    default:
-      console.log (colorStr (types[type][0], types[type][1]) + '    ' + str);
-      break;
+  // GitHub action annotation
+  if (config.isAction) {
+    switch (type) {
+      case 'good':
+        console.log (colorStr ('green', 'good') + '    ' + str);
+        break;
+
+      case 'info':
+        console.log ('::notice file=test.js::' + str);
+        break;
+
+      case 'note':
+        console.log (colorStr ('bold', 'note') + '    ' + str);
+        break;
+
+      case 'warn':
+        counters.warn++;
+        console.log ('::warning file=test.js::' + str);
+        break;
+
+      case 'fail':
+        if (!dontCount) { counters.fail++; }
+        console.log ('::error file=test.js::' + str);
+        break;
+
+      case 'error':
+        if (!dontCount) { counters.fail++; }
+        console.log ('::error file=test.js::' + str.message + '\n');
+        console.dir (str, {
+          depth: null,
+          colors: true,
+        });
+        break;
+
+      case 'object':
+        console.dir (str, {
+          depth: null,
+          colors: true,
+        });
+        break;
+
+      case 'plain':
+      default:
+        console.log (str);
+        break;
+    }
   }
-}
 
 /* eslint-enable complexity */
+  // Normal log output
+  else {
+    switch (type) {
+      case 'good':
+        console.log (colorStr ('green', 'good') + '    ' + str);
+        break;
+
+      case 'info':
+        console.log (colorStr ('cyan', 'info') + '    ' + str);
+        break;
+
+      case 'note':
+        console.log (colorStr ('bold', 'note') + '    ' + str);
+        break;
+
+      case 'warn':
+        counters.warn++;
+        console.log (colorStr ('yellow', 'warn') + '    ' + str);
+        break;
+
+      case 'fail':
+        if (!dontCount) { counters.fail++; }
+        console.log (colorStr ('red', 'FAIL') + '    ' + str);
+        break;
+
+      case 'error':
+        if (!dontCount) { counters.fail++; }
+        console.log (colorStr ('red', 'ERROR') + str.message + '\n');
+        console.dir (str, {
+          depth: null,
+          colors: true,
+        });
+        break;
+
+      case 'object':
+        console.dir (str, {
+          depth: null,
+          colors: true,
+        });
+        break;
+
+      case 'plain':
+      default:
+        console.log (str);
+        break;
+    }
+  }
+}
 
 
 /**
@@ -245,7 +302,6 @@ function getType (input) {
 }
 
 
-/* eslint-disable complexity */
 
 /**
  * Get formatted let type for console
@@ -318,8 +374,6 @@ function typeStr (str, noType) {
 
   return colorStr ('magenta', type) + length;
 }
-
-/* eslint-enable complexity */
 
 
 /**
