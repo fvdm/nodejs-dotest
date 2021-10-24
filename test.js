@@ -35,10 +35,8 @@ doTest.add ('Module interface', () => {
     .isFunction ('fail', '.test.error', test.error)
     .isFunction ('fail', '.test.info', test.info)
     .isFunction ('fail', '.test.exit', test.exit)
-    .done ()
+    .done (() => testsDone++)
   ;
-
-  testsDone++;
 });
 
 
@@ -58,10 +56,8 @@ doTest.add ('.config()', (test) => {
     .isObject ('fail', 'object return', obj)
     .isExactly ('fail', 'object first', obj && obj.first, true)
     .isExactly ('fail', 'object second', obj && obj.second, true)
-    .done ()
+    .done (() => testsDone++)
   ;
-
-  testsDone++;
 });
 
 
@@ -69,10 +65,8 @@ doTest.add ('test() shortcut', (test) => {
   doTest.test ()
     .isFunction ('fail', 'test', test)
     .isObject ('fail', 'test() return', test ())
-    .done ()
+    .done (() => testsDone++)
   ;
-
-  testsDone++;
 });
 
 
@@ -87,11 +81,8 @@ doTest.add ('test() .info()', (test) => {
     .info (['one', 'two'])
     .info ('-- Long array:')
     .info (process.mainModule.paths)
-
-    .done ()
+    .done (() => testsDone++)
   ;
-
-  testsDone++;
 });
 
 
@@ -160,20 +151,26 @@ doTest.add ('Methods', (test, fake) => {
     .good ('This is a good message')
     .done (() => {
       doTest.log ('info', 'test() .done() callback');
+      testsDone++;
     })
   ;
-
-
-  testsDone++;
 });
 
 
-doTest.add ('All tests done', (test) => {
-  testsDone++;
+doTest.add ('doTest.test(Error)', () => {
+  doTest.test (new Error ('test(Error)'), true)
+    .done (() => {
+      testsDone++;
+    })
+  ;
+});
 
-  test ()
-    .isExactly ('fail', 'testsDone', testsDone, doTest.length)
-    .done ()
+
+doTest.add ('doTest.add() test(Error)', test => {
+  test (new Error ('test(Error)'), true)
+    .done (() => {
+      testsDone++;
+    })
   ;
 });
 
