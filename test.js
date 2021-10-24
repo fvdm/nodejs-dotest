@@ -154,8 +154,8 @@ doTest.add ('Methods', (test, fake) => {
     .warn ('This is a warn message')
     .good ('This is a good message')
     .done (() => {
-      doTest.log ('info', 'test() .done() callback');
       testsDone++;
+      doTest.log ('good', 'test() .done() callback');
     })
   ;
 });
