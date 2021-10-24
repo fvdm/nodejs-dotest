@@ -1040,9 +1040,9 @@ unitTests.isNotEmpty = (level, what, input) => {
 };
 
 
-function test (err) {
+function test (err, dontCount) {
   if (err) {
-    log ('error', err);
+    log ('error', err, dontCount);
   }
 
   return unitTests;
@@ -1055,9 +1055,9 @@ testFunc = (index) => {
   ut.queueIndex = index;
   ut.startTime = Date.now();
 
-  return (err) => {
+  return (err, dontCount) => {
     if (err) {
-      log ('error', err);
+      log ('error', err, dontCount);
     }
 
     return ut;
