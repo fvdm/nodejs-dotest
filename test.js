@@ -3,6 +3,14 @@ const doTest = require ('./');
 let testsDone = 0;
 
 
+// Test onExit callback
+doTest.onExit (() => {
+  doTest.test()
+    .isExactly ('fail', 'testsDone', testsDone, doTest.length)
+  ;
+});
+
+
 // Tests
 doTest.add ('Module interface', () => {
   const test = doTest.test ();
