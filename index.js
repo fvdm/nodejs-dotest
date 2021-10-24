@@ -407,7 +407,22 @@ function output (level, what, result, describe) {
     str += describe.false || typestrFail + ' should be ' + describe;
   }
 
-  // output
+  // output in Github action
+  if (isGithubAction) {
+    if (state === 'fail') {
+      core.error (str);
+    }
+    else if (state === 'warn') {
+      core.warning (str);
+    }
+    else {
+      console.log (str);
+    }
+
+    return;
+  }
+
+  // output normal
   console.log (str);
 }
 
