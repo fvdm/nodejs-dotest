@@ -3,7 +3,7 @@
 One dev dependency for your [Node.js](https://nodejs.org) package to run ESLint,
 your test.js, coverage and report to Coveralls.io when running on Travis CI.
 
-[![npm](https://img.shields.io/npm/v/dotest.svg?maxAge=3600)](https://github.com/fvdm/nodejs-dotest/blob/master/CHANGELOG.md)
+[![npm](https://img.shields.io/npm/v/dotest.svg?maxAge=3600)](https://www.npmjs.com/package/dotest?activeTab=versions)
 [![Build Status](https://github.com/fvdm/nodejs-dotest/actions/workflows/node.js.yml/badge.svg?branch=master)](https://github.com/fvdm/nodejs-dotest/actions/workflows/node.js.yml)
 [![Coverage Status](https://coveralls.io/repos/github/fvdm/nodejs-dotest/badge.svg?branch=master)](https://coveralls.io/github/fvdm/nodejs-dotest?branch=master)
 
@@ -12,6 +12,7 @@ your test.js, coverage and report to Coveralls.io when running on Travis CI.
 * When it detects Travis CI it will also submit the coverage report to [Coveralls.io](https://coveralls.io)
 
 [![Console example](https://fvdm.com/wp-content/uploads/2016/05/nodejs_dotest_example-340x400.png)](https://fvdm.com/micro/nodejs-dotest-console-output)
+- [Changelog](https://github.com/fvdm/nodejs-dotest/blob/master/CHANGELOG.md)
 
 
 ## Example
