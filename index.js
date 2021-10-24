@@ -98,13 +98,6 @@ function log (type, str, dontCount) {
   }
 
   switch (type) {
-    case 'info':
-      if (isGithubAction) {
-        core.notice (colorStr ('bold', 'info') + '    ' + str);
-      }
-
-      break;
-
     case 'note':
       console.log (colorStr ('bold', str));
       break;
@@ -233,20 +226,10 @@ function done (callback) {
 
   // That was the last one
   console.log ('\n');
-
-  if (isGithubAction) {
-    log ('info', colorStr ('bold', counters.fail) + ' errors');
-    log ('info', colorStr ('bold', counters.warn) + ' warnings');
-    console.log ();
-    log ('info', colorStr ('bold', timing) + ' seconds');
-  }
-  else {
-    log ('info', colorStr ('yellow', counters.fail) + ' errors');
-    log ('info', colorStr ('yellow', counters.warn) + ' warnings');
-    console.log ();
-    log ('info', colorStr ('yellow', timing) + ' seconds');
-  }
-
+  log ('info', colorStr ('yellow', counters.fail) + ' errors');
+  log ('info', colorStr ('yellow', counters.warn) + ' warnings');
+  console.log ();
+  log ('info', colorStr ('yellow', timing) + ' seconds');
   console.log ();
 
   if (counters.fail) {
