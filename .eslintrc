@@ -31,7 +31,7 @@
     "computed-property-spacing": ["error", "never"],
     "consistent-return": "warn",
     "curly": ["error", "all"],
-    "default-case": "error",
+    "default-case": "off",
     "dot-notation": ["warn", {
       "allowKeywords": true
     }],
