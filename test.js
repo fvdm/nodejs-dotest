@@ -136,7 +136,7 @@ doTest.add ('Methods', (test, fake) => {
     .isNotEmpty ('fail', 'test() .isNotEmpty array', ['yay'])
     .isNotEmpty ('fail', 'test() .isNotEmpty error', new Error ('test error'))
     .info ('Warnings for coverage:')
-    .isCondition ('warn', 'test() .isCondition invalid', 1, '', 2)
+    .isCondition ('warn', 'test() .isCondition invalid', 1, '>', 2)
     .isNotEmpty ('warn', 'test() .isNotEmpty undefined', undefined)
     .isNotEmpty ('warn', 'test() .isNotEmpty null', null)
     .isNotEmpty ('warn', 'test() .isNotEmpty string', '')
