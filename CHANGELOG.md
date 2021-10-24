@@ -1,3 +1,58 @@
+### 2.11.0 (2021-10-24)
+
+##### Chores
+
+* **package:**  Add @actions/core dependency ([496d1107](https://github.com/fvdm/nodejs-dotest/commit/496d1107cd71ac3e9ee08e8d55d68806e8a77415))
+* **deps:**  Bump eslint from 7.32.0 to 8.0.0 ([820c725e](https://github.com/fvdm/nodejs-dotest/commit/820c725ea4712bf8c702f325f98d89ebcf32a8ca))
+
+##### New Features
+
+*  Style log lines for Github actions ([de5ea77d](https://github.com/fvdm/nodejs-dotest/commit/de5ea77d7520f28892828fc1f03598469dc03325))
+
+##### Bug Fixes
+
+* **output:**  Conditional styling for Github action ([2e367c13](https://github.com/fvdm/nodejs-dotest/commit/2e367c1313d5a17e1f255ee9706dd5f7ea0f614f))
+
+##### Refactors
+
+* **test:**  Allow `dontCount` for errors ([c82cddd7](https://github.com/fvdm/nodejs-dotest/commit/c82cddd7a9c1b734b415450d1dec938db1904f86))
+*  Removed Github urls from output ([e5a7b73f](https://github.com/fvdm/nodejs-dotest/commit/e5a7b73fe9b5b503471bdebb0eb87b62ac929462))
+*  More column spacing for readability ([78c52b42](https://github.com/fvdm/nodejs-dotest/commit/78c52b42079ff984b00485dde8ab95203fdc84b2))
+*  Style fail/warn checks for Github action ([c6a9c85c](https://github.com/fvdm/nodejs-dotest/commit/c6a9c85cfcf2133a18c42db78e2f0499b5214209))
+*  Added blank link after error dump ([31972009](https://github.com/fvdm/nodejs-dotest/commit/31972009439b9995bef24f33f7adc42b8da010e0))
+*  Align output columns whitespace ([712f4c90](https://github.com/fvdm/nodejs-dotest/commit/712f4c905119d7a5982e1a6b6369e9c1db2d4d8f))
+*  Cleaner fail/warn/error lines for action ([d9bd8917](https://github.com/fvdm/nodejs-dotest/commit/d9bd8917faadb447beba3b613f811b3ea8636eaf))
+*  Don't style info/notice on Github action ([36499861](https://github.com/fvdm/nodejs-dotest/commit/364998618bb709ddb83d0b3530bde036a24f61b4))
+* **log:**  Increase column spacing on error ([dac64ddb](https://github.com/fvdm/nodejs-dotest/commit/dac64ddb854ceed452f0c5d4f0b0ceb3739e5142))
+* **output:**  Too much spacing for warn/fail ([c62dd243](https://github.com/fvdm/nodejs-dotest/commit/c62dd243b7a44f7535595c78ca283bedf3db88bc))
+
+##### Code Style Changes
+
+*  Removed obsolete default cases ([5b6bc213](https://github.com/fvdm/nodejs-dotest/commit/5b6bc21350fe73e35d41da3b690143d9803080b2))
+* **ci:**  Ignore Github action conditions ([1f66005b](https://github.com/fvdm/nodejs-dotest/commit/1f66005b1ebe24079b7deb1b240e47d996d92214))
+
+##### Tests
+
+*  Indicate `test().done()` callback as good ([bba421d4](https://github.com/fvdm/nodejs-dotest/commit/bba421d4e2a787d28b87ad15b460d5b8b9f8235e))
+*  Minor reordering ([eb79be5f](https://github.com/fvdm/nodejs-dotest/commit/eb79be5f4398528a2d076dd9e629d64e3fff5ec3))
+*  More warnings for coverage ([5562f83b](https://github.com/fvdm/nodejs-dotest/commit/5562f83bef89d9429b215f19c5298753529f6e3f))
+*  More accurate `testsDone` counting ([12fa7be9](https://github.com/fvdm/nodejs-dotest/commit/12fa7be908e2dc22fe5402a4c80a45a970ee7e06))
+*  Minor clean up ([017469ce](https://github.com/fvdm/nodejs-dotest/commit/017469ce61fca5846e5747000474b21f0930f9b2))
+*  Added onExit() callback ([a8833562](https://github.com/fvdm/nodejs-dotest/commit/a8833562866d48c55c6ad2d5c9f33a6505790f35))
+* **ci:**
+  *  Default case is not required in ESLint ([78535c3c](https://github.com/fvdm/nodejs-dotest/commit/78535c3c65b9b4f3e56030bf5c92a96db12b5189))
+  *  Modern ESLint config ([4b59d0c1](https://github.com/fvdm/nodejs-dotest/commit/4b59d0c14d9481214a741212c3b6e586e8606647))
+  *  Ignore Coveralls error ([0e1f121a](https://github.com/fvdm/nodejs-dotest/commit/0e1f121a4ce6708b232c4a5aa392834e0f642f7c))
+* **isCondition:**  Fixed missing operator ([ad1d044e](https://github.com/fvdm/nodejs-dotest/commit/ad1d044edd7d90044172bd8d14810077ae5020a6))
+* **action:**
+  *  Always submit coverage report ([dda34e56](https://github.com/fvdm/nodejs-dotest/commit/dda34e562ef6d9048cc3ae74a0524902aff479b1))
+  *  Add dotest env vars ([a93bbfd5](https://github.com/fvdm/nodejs-dotest/commit/a93bbfd5f326e01467a2af639d5129cf1393a19a))
+  *  Fix indentation ([58445c36](https://github.com/fvdm/nodejs-dotest/commit/58445c36545c41161fc8314782f4ca3a615b4c87))
+  *  Add good-build hook ([e48fc545](https://github.com/fvdm/nodejs-dotest/commit/e48fc5457220fcf271574d28f675b88b99747dc4))
+  *  Run on a weekly schedule ([ed4d9f28](https://github.com/fvdm/nodejs-dotest/commit/ed4d9f287ad4d4a8d8e0be3d3cd19bf77b8d291c))
+  *  Ignore PRs on master branch ([c760d098](https://github.com/fvdm/nodejs-dotest/commit/c760d0984c112f24a3f2ca179b02b66805200f43))
+  *  Use both LTS and current versions ([75b56021](https://github.com/fvdm/nodejs-dotest/commit/75b5602173b0c7c8425be0fbc3ded8ded8679307))
+
 ### 2.10.0 (2021-08-31)
 
 ##### Documentation Changes
