@@ -105,10 +105,10 @@ function log (type, str, dontCount) {
     case 'fail':
       if (!dontCount) { counters.fail++; }
       if (isGithubAction) {
-        core.error ('  ' + str);
+        core.error ('    ' + str);
       }
       else {
-        console.log (colorStr ('red', 'FAIL') + '     ' + str);
+        console.log (colorStr ('red', 'FAIL') + '       ' + str);
       }
 
       break;
@@ -117,10 +117,10 @@ function log (type, str, dontCount) {
       counters.warn++;
 
       if (isGithubAction) {
-        core.warning (str);
+        core.warning ('  ' + str);
       }
       else {
-        console.log (colorStr ('yellow', 'warn') + '     ' + str);
+        console.log (colorStr ('yellow', 'warn') + '       ' + str);
       }
 
       break;
@@ -133,7 +133,7 @@ function log (type, str, dontCount) {
         console.log();
       }
       else {
-        console.log (colorStr ('red', 'ERROR    ') + str.message + '\n');
+        console.log (colorStr ('red', 'ERROR      ') + str.message + '\n');
       }
 
       console.dir (str, {
@@ -158,7 +158,7 @@ function log (type, str, dontCount) {
       break;
 
     default:
-      console.log (colorStr (types[type][0], types[type][1]) + '     ' + str);
+      console.log (colorStr (types[type][0], types[type][1]) + '       ' + str);
       break;
   }
 }
@@ -397,10 +397,10 @@ function output (level, what, result, describe) {
   }
 
   if (isGithubAction && state.match (/^(fail|warn)$/)) {
-    str += '';
+    str += '  ';
   }
   else {
-    str += '     ';
+    str += '       ';
   }
 
   str += colorStr ('blue', what) + ' ';
@@ -417,10 +417,10 @@ function output (level, what, result, describe) {
   // output in Github action
   if (isGithubAction) {
     if (state === 'fail') {
-      core.error (str);
+      core.error ('  ' + str);
     }
     else if (state === 'warn') {
-      core.warning (str);
+      core.warning ('  ' + str);
     }
     else {
       console.log (str);
