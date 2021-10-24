@@ -105,7 +105,7 @@ function log (type, str, dontCount) {
     case 'fail':
       if (!dontCount) { counters.fail++; }
       if (isGithubAction) {
-        core.error ('FAIL    ' + str);
+        core.error ('  ' + str);
       }
       else {
         console.log (colorStr ('red', 'FAIL') + '    ' + str);
@@ -117,7 +117,7 @@ function log (type, str, dontCount) {
       counters.warn++;
 
       if (isGithubAction) {
-        core.warning ('warn    ' + str);
+        core.warning (str);
       }
       else {
         console.log (colorStr ('yellow', 'warn') + '    ' + str);
@@ -129,7 +129,7 @@ function log (type, str, dontCount) {
       if (!dontCount) { counters.fail++; }
 
       if (isGithubAction) {
-        core.error ('ERROR  ' + str.message);
+        core.error ('  ' + str.message);
         console.log();
       }
       else {
