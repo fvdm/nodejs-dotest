@@ -134,6 +134,9 @@ doTest.add ('Methods', (test, fake) => {
     .isNotEmpty ('fail', 'test() .isNotEmpty object', { hi: 'you' })
     .isNotEmpty ('fail', 'test() .isNotEmpty array', ['yay'])
     .isNotEmpty ('fail', 'test() .isNotEmpty error', new Error ('test error'))
+    .isExactly ('fail', '.getType', doTest.getType ([]), 'array')
+    .isExactly ('fail', '.colorStr', colorTest, colorMatch)
+
     .info ('Warnings for coverage:')
     .isCondition ('warn', 'test() .isCondition invalid', 1, '>', 2)
     .isNotEmpty ('warn', 'test() .isNotEmpty undefined', undefined)
@@ -142,8 +145,6 @@ doTest.add ('Methods', (test, fake) => {
     .isNotEmpty ('warn', 'test() .isNotEmpty object', {})
     .isNotEmpty ('warn', 'test() .isNotEmpty array', [])
     .isNotEmpty ('warn', 'test() .isNotEmpty error', new Error ())
-    .isExactly ('fail', '.getType', doTest.getType ([]), 'array')
-    .isExactly ('fail', '.colorStr', colorTest, colorMatch)
     .isEmpty ('warn', 'output() warn', 'test warning')
     .isInstanceOf ('warn', 'TestClass', [], Date)
     .isClass ('warn', 'class', '')
