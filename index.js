@@ -141,6 +141,8 @@ function log (type, str, dontCount) {
         colors: true,
       });
 
+      console.log();
+
       break;
 
     case 'object':
