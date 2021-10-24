@@ -10,8 +10,8 @@ your test.js, coverage and report to Coveralls.io when running on Travis CI.
 * It runs ESLint with your package's `.eslintrc` config
 * Finally it runs your `test.js` with `nyc` for coverage
 * When it detects Travis CI it will also submit the coverage report to [Coveralls.io](https://coveralls.io)
+* In case it runs in a Github action the warning, fail and error lines are highlighted.
 
-[![Console example](https://fvdm.com/wp-content/uploads/2016/05/nodejs_dotest_example-340x400.png)](https://fvdm.com/micro/nodejs-dotest-console-output)
 - [Changelog](https://github.com/fvdm/nodejs-dotest/blob/master/CHANGELOG.md)
 
 
