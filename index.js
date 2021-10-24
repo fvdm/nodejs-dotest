@@ -108,7 +108,7 @@ function log (type, str, dontCount) {
         core.error ('  ' + str);
       }
       else {
-        console.log (colorStr ('red', 'FAIL') + '    ' + str);
+        console.log (colorStr ('red', 'FAIL') + '     ' + str);
       }
 
       break;
@@ -120,7 +120,7 @@ function log (type, str, dontCount) {
         core.warning (str);
       }
       else {
-        console.log (colorStr ('yellow', 'warn') + '    ' + str);
+        console.log (colorStr ('yellow', 'warn') + '     ' + str);
       }
 
       break;
@@ -156,7 +156,7 @@ function log (type, str, dontCount) {
       break;
 
     default:
-      console.log (colorStr (types[type][0], types[type][1]) + '    ' + str);
+      console.log (colorStr (types[type][0], types[type][1]) + '     ' + str);
       break;
   }
 }
@@ -394,7 +394,7 @@ function output (level, what, result, describe) {
       break;
   }
 
-  str += '    ' + colorStr ('blue', what) + ' ';
+  str += '     ' + colorStr ('blue', what) + ' ';
 
   // describe result
   if (result.state) {
