@@ -133,7 +133,7 @@ function log (type, str, dontCount) {
         console.log();
       }
       else {
-        console.log (colorStr ('red', 'ERROR  ') + str.message + '\n');
+        console.log (colorStr ('red', 'ERROR    ') + str.message + '\n');
       }
 
       console.dir (str, {
@@ -389,14 +389,21 @@ function output (level, what, result, describe) {
   // log line
   switch (state) {
     case 'good': str = colorStr ('green', 'good'); break;
-    case 'fail': str = colorStr ('red', 'FAIL'); break;
-    case 'warn': str = colorStr ('yellow', 'warn'); break;
+    case 'fail': str = (!isGithubAction ? colorStr ('red', 'FAIL') : ''); break;
+    case 'warn': str = (!isGithubAction ? colorStr ('yellow', 'warn') : ''); break;
     default:
       // skip
       break;
   }
 
-  str += '     ' + colorStr ('blue', what) + ' ';
+  if (isGithubAction && state.match (/^(fail|warn)$/)) {
+    str += '';
+  }
+  else {
+    str += '     ';
+  }
+
+  str += colorStr ('blue', what) + ' ';
 
   // describe result
   if (result.state) {
