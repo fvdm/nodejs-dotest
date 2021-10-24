@@ -145,6 +145,9 @@ doTest.add ('Methods', (test, fake) => {
     .isExactly ('fail', '.getType', doTest.getType ([]), 'array')
     .isExactly ('fail', '.colorStr', colorTest, colorMatch)
     .isEmpty ('warn', 'output() warn', 'test warning')
+    .isInstanceOf ('warn', 'TestClass', [], Date)
+    .isClass ('warn', 'class', '')
+
     .error (new Error ('This is an error'), true)
     .fail ('This is a fail message', true)
     .warn ('This is a warn message')
