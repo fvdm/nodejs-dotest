@@ -163,7 +163,6 @@ doTest.add ('Methods', (test, fake) => {
     })
   ;
 
-  /* eslint-enable no-undefined */
 
   testsDone++;
 });
