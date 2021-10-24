@@ -417,10 +417,10 @@ function output (level, what, result, describe) {
   // output in Github action
   if (isGithubAction) {
     if (state === 'fail') {
-      core.error ('  ' + str);
+      core.error (str);
     }
     else if (state === 'warn') {
-      core.warning ('  ' + str);
+      core.warning (str);
     }
     else {
       console.log (str);
