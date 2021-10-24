@@ -34,6 +34,7 @@ jobs:
       - run: npm install
       - run: npm test
         env:
+          DOTEST_WAIT: ${{ secrets.DOTEST_WAIT }}
           DOTEST_NOCOV: ${{ secrets.DOTEST_NOCOV }}
           DOTEST_MINCOV: ${{ secrets.DOTEST_MINCOV }}
       - run: npm audit --production
