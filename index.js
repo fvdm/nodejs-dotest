@@ -9,12 +9,15 @@ License:        Unlicense (public domain, see LICENSE file)
 
 const { parse, join } = require ('path');
 const { inspect } = require ('util');
+const core = require ('@actions/core');
 let { dir } = parse (process.mainModule.filename);
 
 dir = dir.replace (/\/(lib|test)$/, '');
 
 const pkg = require (join (dir, 'package.json'));
 const lib = require (join (__dirname, 'package.json'));
+
+const isGithubAction = process.env.GITHUB_ACTIONS === 'true';
 
 const counters = {
   fail: 0,
@@ -95,34 +98,70 @@ function log (type, str, dontCount) {
   }
 
   switch (type) {
+    case 'info':
+      if (isGithubAction) {
+        core.notice (colorStr ('bold', 'info') + '    ' + str);
+      }
+
+      break;
+
     case 'note':
       console.log (colorStr ('bold', str));
       break;
+
     case 'fail':
       if (!dontCount) { counters.fail++; }
-      console.log (colorStr ('red', 'FAIL') + '    ' + str);
+      if (isGithubAction) {
+        core.error ('FAIL    ' + str);
+      }
+      else {
+        console.log (colorStr ('red', 'FAIL') + '    ' + str);
+      }
+
       break;
+
     case 'warn':
       counters.warn++;
-      console.log (colorStr ('yellow', 'warn') + '    ' + str);
+
+      if (isGithubAction) {
+        core.warning ('warn    ' + str);
+      }
+      else {
+        console.log (colorStr ('yellow', 'warn') + '    ' + str);
+      }
+
       break;
+
     case 'error':
       if (!dontCount) { counters.fail++; }
-      console.log (colorStr ('red', 'ERROR  ') + str.message + '\n');
+
+      if (isGithubAction) {
+        core.error ('ERROR  ' + str.message);
+        console.log();
+      }
+      else {
+        console.log (colorStr ('red', 'ERROR  ') + str.message + '\n');
+      }
+
       console.dir (str, {
         depth: null,
         colors: true,
       });
+
       break;
+
     case 'object':
       console.dir (str, {
         depth: null,
         colors: true,
       });
+
       break;
+
     case 'plain':
       console.log (str);
       break;
+
     default:
       console.log (colorStr (types[type][0], types[type][1]) + '    ' + str);
       break;
@@ -171,7 +210,13 @@ function done (callback) {
     ms = Date.now() - this.startTime;
 
     console.log();
-    log ('info', colorStr ('yellow', ms + ' ms'));
+
+    if (isGithubAction) {
+      log ('info', ms + ' ms');
+    }
+    else {
+      log ('info', colorStr ('yellow', ms + ' ms'));
+    }
   }
 
   next++;
@@ -188,10 +233,20 @@ function done (callback) {
 
   // That was the last one
   console.log ('\n');
-  log ('info', colorStr ('yellow', counters.fail) + ' errors');
-  log ('info', colorStr ('yellow', counters.warn) + ' warnings');
-  console.log ();
-  log ('info', colorStr ('yellow', timing) + ' seconds');
+
+  if (isGithubAction) {
+    log ('info', colorStr ('bold', counters.fail) + ' errors');
+    log ('info', colorStr ('bold', counters.warn) + ' warnings');
+    console.log ();
+    log ('info', colorStr ('bold', timing) + ' seconds');
+  }
+  else {
+    log ('info', colorStr ('yellow', counters.fail) + ' errors');
+    log ('info', colorStr ('yellow', counters.warn) + ' warnings');
+    console.log ();
+    log ('info', colorStr ('yellow', timing) + ' seconds');
+  }
+
   console.log ();
 
   if (counters.fail) {
@@ -1105,6 +1160,7 @@ module.exports = {
   colorStr,
   getType,
   config: setConfig,
+  setSecret: core.setSecret,
   get length () {
     return queue.length;
   },
