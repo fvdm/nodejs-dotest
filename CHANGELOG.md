@@ -1,3 +1,17 @@
+#### 2.11.1 (2021-10-24)
+
+##### Documentation Changes
+
+*  Minor text edit ([1ecc359b](https://github.com/fvdm/nodejs-dotest/commit/1ecc359bd53bdb118e37282fb740703514e6467c))
+* **badges:**  Link npm badge to released versions ([ad9991b7](https://github.com/fvdm/nodejs-dotest/commit/ad9991b7b76df251c041b556b3486fe78f70287f))
+
+##### Tests
+
+* **ci:**
+  *  Added DOTEST_WAIT env var ([21f4da83](https://github.com/fvdm/nodejs-dotest/commit/21f4da83f4a08a3a762c1fe950560849cf878330))
+  *  Removed obsolete git fetch ([7471f25e](https://github.com/fvdm/nodejs-dotest/commit/7471f25e99e4dcbea4cbd810f4ffa52aa869f7a6))
+  *  Renamed Finish to Upload coverage ([e31d0345](https://github.com/fvdm/nodejs-dotest/commit/e31d03455767ca6856d5f557f84a5b056838013a))
+
 ### 2.11.0 (2021-10-24)
 
 ##### Chores
