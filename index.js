@@ -93,6 +93,8 @@ function log (type, str, dontCount) {
 
     case 'fail':
       if (!dontCount) { counters.fail++; }
+
+      /* istanbul ignore next */
       if (isGithubAction) {
         core.error ('    ' + str);
       }
@@ -105,6 +107,7 @@ function log (type, str, dontCount) {
     case 'warn':
       counters.warn++;
 
+      /* istanbul ignore next */
       if (isGithubAction) {
         core.warning ('  ' + str);
       }
@@ -117,6 +120,7 @@ function log (type, str, dontCount) {
     case 'error':
       if (!dontCount) { counters.fail++; }
 
+      /* istanbul ignore next */
       if (isGithubAction) {
         core.error ('    ' + str.message);
         console.log();
@@ -195,6 +199,7 @@ function done (callback) {
 
     console.log();
 
+    /* istanbul ignore next */
     if (isGithubAction) {
       log ('info', ms + ' ms');
     }
@@ -376,6 +381,7 @@ function output (level, what, result, describe) {
   let str = '';
 
   // log line
+  /* istanbul ignore next */
   switch (state) {
     case 'good': str = colorStr ('green', 'good'); break;
     case 'fail': str = (!isGithubAction ? colorStr ('red', 'FAIL') : ''); break;
@@ -385,6 +391,7 @@ function output (level, what, result, describe) {
       break;
   }
 
+  /* istanbul ignore next */
   if (isGithubAction && state.match (/^(fail|warn)$/)) {
     str += '  ';
   }
@@ -404,6 +411,7 @@ function output (level, what, result, describe) {
   }
 
   // output in Github action
+  /* istanbul ignore next */
   if (isGithubAction) {
     if (state === 'fail') {
       core.error (str);
@@ -433,6 +441,7 @@ function output (level, what, result, describe) {
  */
 
 function processExit (fromProcess, code) {
+  /* istanbul ignore next */
   if (counters.fail) {
     process.exit (1);
   }
@@ -458,6 +467,7 @@ process.on ('exit', (code) => {
  * @param   {Error}  err  The error that occured
  */
 
+/* istanbul ignore next */
 function uncaughtException (err) {
   log ('error', err);
 }
@@ -487,26 +497,33 @@ function testLog (level, str, dontCount) {
 
 unitTests = {
   done: done,
+
   error: (str, dontCount) => {
     log ('error', str, dontCount);
     return unitTests;
   },
+
   good: (str) => {
     testLog ('good', str);
     return unitTests;
   },
+
   fail: (str, dontCount) => {
     testLog ('fail', str, dontCount);
     return unitTests;
   },
+
   warn: (str) => {
     testLog ('warn', str);
     return unitTests;
   },
+
   info: (str) => {
     testLog ('info', str);
     return unitTests;
   },
+
+  /* istanbul ignore next */
   exit: () => {
     testLog ('info', 'Exit process');
     processExit (false);
