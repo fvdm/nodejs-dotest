@@ -129,7 +129,7 @@ function log (type, str, dontCount) {
       if (!dontCount) { counters.fail++; }
 
       if (isGithubAction) {
-        core.error ('  ' + str.message);
+        core.error ('    ' + str.message);
         console.log();
       }
       else {
