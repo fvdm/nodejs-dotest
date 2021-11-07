@@ -16,11 +16,7 @@ if [[ -z "$minimalCoverage" ]]; then
   minimalCoverage=85
 fi
 
-export GIT_REPO_SLUG="$TRAVIS_REPO_SLUG"
 
-# Find reposlug
-if [ "$GIT_REPO_SLUG" == "" ]; then
-  export GIT_REPO_SLUG=$(git ls-remote --get-url | sed 's/.*[\/|@]github.com[:\/]\(.*\).git/\1/')
 fi
 
 # ESLint
