@@ -18,7 +18,6 @@ doTest.add ('Module interface', () => {
   test
     .isObject ('fail', 'exports', doTest)
     .isObject ('fail', '.package', doTest.package)
-    .isString ('warn', '.githubRepo', doTest.githubRepo)
     .isFunction ('fail', '.config', doTest.config)
     .isFunction ('fail', '.add', doTest.add)
     .isFunction ('fail', '.run', doTest.run)
