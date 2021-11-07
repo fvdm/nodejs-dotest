@@ -85,6 +85,7 @@ elif [[ -x "$nycBin" ]]; then
   --exclude='**/coverage/**' \
   --exclude='**/packages/**' \
   --exclude='**/.git/**' \
+  --exclude='**/node_modules/**' \
   --reporter=lcov \
   --reporter=text \
   node test.js || result=1
