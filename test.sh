@@ -5,8 +5,15 @@ nodebin="$libpath/node_modules/.bin"
 eslintBin="$nodebin/eslint"
 nycBin="$nodebin/nyc"
 coverallsBin="$nodebin/coveralls"
+
+
+# Coverage
 skipCoverage=$DOTEST_NOCOV
 minimalCoverage=$DOTEST_MINCOV
+branchCoverage$DOTEST_COVBRANCHES
+lineCoverage=$DOTEST_COVLINES
+functionCoverage=$DOTEST_COVFUNCTIONS
+statementCoverage=$DOTEST_COVSTATEMENTS
 
 if [[ -z "$skipCoverage" ]]; then
   skipCoverage=false
@@ -16,8 +23,22 @@ if [[ -z "$minimalCoverage" ]]; then
   minimalCoverage=85
 fi
 
-
+if [[ -z "$branchCoverage" ]]; then
+  branchCoverage=$minimalCoverage
 fi
+
+if [[ -z "$lineCoverage" ]]; then
+  lineCoverage=$minimalCoverage
+fi
+
+if [[ -z "$functionCoverage" ]]; then
+  functionCoverage=$minimalCoverage
+fi
+
+if [[ -z "$statementCoverage" ]]; then
+  statementCoverage=$minimalCoverage
+fi
+
 
 # ESLint
 if [[ -x "$eslintBin" ]]; then
@@ -54,10 +75,10 @@ elif [[ -x "$nycBin" ]]; then
   "$nycBin" \
   --clean \
   --check-coverage \
-  --branches=$minimalCoverage \
-  --lines=$minimalCoverage \
-  --functions=$minimalCoverage \
-  --statements=$minimalCoverage \
+  --branches=$branchCoverage \
+  --lines=$lineCoverage \
+  --functions=$functionCoverage \
+  --statements=$statementCoverage \
   --all \
   --exclude='**/test.js' \
   --exclude='**/example.js' \

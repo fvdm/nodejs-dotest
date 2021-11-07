@@ -102,11 +102,15 @@ This is usually intended for CI builds, so best to make sure it's in your dev de
 The script takes these env variables. They override the code settings.
 
 
-name            | default | description
-:---------------|:--------|:-----------
-[DOTEST_WAIT]   | 0       | Pause N ms between tests
-[DOTEST_NOCOV]  |         | Set to 'true' to skip coverage report
-[DOTEST_MINCOV] | 85      | Minimum required coverage percentage
+name                   | default          | description
+:----------------------|:-----------------|:-----------
+[DOTEST_WAIT]          | 0                | Pause N ms between tests
+[DOTEST_NOCOV]         |                  | Set to 'true' to skip coverage report
+[DOTEST_MINCOV]        | 85               | Minimum coverage % default
+[DOTEST_COVBRANCHES]   | `$DOTEST_MINCOV` | Minimum coverage % for branches
+[DOTEST_COVLINES]      | `$DOTEST_MINCOV` | Minimum coverage % for lines
+[DOTEST_COVFUNCTIONS]  | `$DOTEST_MINCOV` | Minimum coverage % for functions
+[DOTEST_COVSTATEMENTS] | `$DOTEST_MINCOV` | Minimum coverage % for statements
 
 
 ## Methods
