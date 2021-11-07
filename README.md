@@ -92,9 +92,12 @@ Just run `npm test`
 
 ## Installation
 
-This is usually intended for CI builds, so best to make sure it's in your dev dependencies ;)
+This is usually intended for CI builds,
+so best to make sure it's in your `devDependencies`
 
-`npm i dotest --save-dev`
+```sh
+npm i dotest --save-dev
+```
 
 
 ## Configuration
