@@ -1,3 +1,23 @@
+### 2.12.0 (2021-11-09)
+
+##### Documentation Changes
+
+*  Minor tweaks ([a60bfe6e](https://github.com/fvdm/nodejs-dotest/commit/a60bfe6eef4445f07525d4e4bddb20f850fd37c9))
+
+##### New Features
+
+* **runner:**  Env vars to override coverage ([d4989372](https://github.com/fvdm/nodejs-dotest/commit/d4989372284142e3e4c66babc644cc9478543b6c))
+
+##### Refactors
+
+* **runner:**
+  *  Exclude node_modules ([99403292](https://github.com/fvdm/nodejs-dotest/commit/99403292a6d5cf4558dab823c77868749998e605))
+  *  Removed obsolete vars ([16341c50](https://github.com/fvdm/nodejs-dotest/commit/16341c5010419a46ca977718dd33dbd7ae29dcb8))
+
+##### Tests
+
+*  Removed obsolete var check ([bb848cde](https://github.com/fvdm/nodejs-dotest/commit/bb848cde7af36211702a1d39e92fa697f781d7f8))
+
 #### 2.11.1 (2021-10-24)
 
 ##### Documentation Changes
