@@ -10,7 +10,7 @@ coverallsBin="$nodebin/coveralls"
 # Coverage
 skipCoverage=$DOTEST_NOCOV
 minimalCoverage=$DOTEST_MINCOV
-branchCoverage$DOTEST_COVBRANCHES
+branchCoverage=$DOTEST_COVBRANCHES
 lineCoverage=$DOTEST_COVLINES
 functionCoverage=$DOTEST_COVFUNCTIONS
 statementCoverage=$DOTEST_COVSTATEMENTS
