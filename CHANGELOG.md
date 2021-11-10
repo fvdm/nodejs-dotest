@@ -1,3 +1,9 @@
+#### 2.12.1 (2021-11-10)
+
+##### Bug Fixes
+
+* **runner:**  Syntax typo on `branchCoverage` ([8c182036](https://github.com/fvdm/nodejs-dotest/commit/8c182036eea44f1b4046cf244e0a75fc9d1bf3d1))
+
 ### 2.12.0 (2021-11-09)
 
 ##### Documentation Changes
