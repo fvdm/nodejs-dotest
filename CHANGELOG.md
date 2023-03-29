@@ -1,3 +1,18 @@
+#### 2.12.1 (2023-03-29)
+
+##### Chores
+
+* **package:**  Update dependencies ([6915ad0c](https://github.com/fvdm/nodejs-dotest/commit/6915ad0c2973529cd58026db0849f76f931f957f))
+* **github:**
+  *  Bump github/codeql-action from 1 to 2 ([78ce8326](https://github.com/fvdm/nodejs-dotest/commit/78ce8326d7bc249f35fde5c7af64456f57f8711a))
+  *  Bump actions/setup-node from 3.0.0 to 3.1.0 ([97f85b06](https://github.com/fvdm/nodejs-dotest/commit/97f85b06bdef0fad0f34da43aceaf150add4114a))
+  *  Bump actions/checkout from 2 to 3 ([acdc8922](https://github.com/fvdm/nodejs-dotest/commit/acdc8922952460a15ca5a3313c331980de2f97f6))
+  *  Bump actions/setup-node from 2 to 3.0.0 ([f134af34](https://github.com/fvdm/nodejs-dotest/commit/f134af34ab6e24e5591bfe24364413d5d5609bde))
+
+##### Tests
+
+* **ci:**  Use major versions in actions ([e85dbb8e](https://github.com/fvdm/nodejs-dotest/commit/e85dbb8e286d5e677545fb3d41db46f88b657c1c))
+
 #### 2.12.1 (2021-11-10)
 
 ##### Bug Fixes
