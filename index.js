@@ -386,6 +386,7 @@ function output (level, what, result, describe) {
     case 'good': str = colorStr ('green', 'good'); break;
     case 'fail': str = (!isGithubAction ? colorStr ('red', 'FAIL') : ''); break;
     case 'warn': str = (!isGithubAction ? colorStr ('yellow', 'warn') : ''); break;
+    // no default
   }
 
   /* istanbul ignore next */
@@ -492,6 +493,13 @@ function testLog (level, str, dontCount) {
   }
 }
 
+/* istanbul ignore next */
+function unitTestsExit () {
+  testLog ('info', 'Exit process');
+  processExit (false);
+  return unitTests;
+}
+
 unitTests = {
   done: done,
 
@@ -520,12 +528,7 @@ unitTests = {
     return unitTests;
   },
 
-  /* istanbul ignore next */
-  exit: () => {
-    testLog ('info', 'Exit process');
-    processExit (false);
-    return unitTests;
-  },
+  exit: unitTestsExit,
 };
 
 
@@ -951,6 +954,7 @@ unitTests.isCondition = (level, what, one, operator, two) => {
     case '>': result.state = one > two; break;
     case '<=': result.state = one <= two; break;
     case '>=': result.state = one >= two; break;
+    // no default
   }
 
   output (level, what, result, describe);
