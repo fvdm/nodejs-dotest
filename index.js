@@ -386,6 +386,7 @@ function output (level, what, result, describe) {
     case 'good': str = colorStr ('green', 'good'); break;
     case 'fail': str = (!isGithubAction ? colorStr ('red', 'FAIL') : ''); break;
     case 'warn': str = (!isGithubAction ? colorStr ('yellow', 'warn') : ''); break;
+    // no default
   }
 
   /* istanbul ignore next */
@@ -951,6 +952,7 @@ unitTests.isCondition = (level, what, one, operator, two) => {
     case '>': result.state = one > two; break;
     case '<=': result.state = one <= two; break;
     case '>=': result.state = one >= two; break;
+    // no default
   }
 
   output (level, what, result, describe);
