@@ -7,22 +7,22 @@ Feedback:       https://github.com/fvdm/nodejs-dotest/issues
 License:        Unlicense (public domain, see LICENSE file)
 */
 
-const { parse, join } = require ('path');
-const { inspect } = require ('util');
-const core = require ('@actions/core');
-let { dir } = parse (process.mainModule.filename);
+const { parse, join } = require( 'path' );
+const { inspect } = require( 'util' );
+const core = require( '@actions/core' );
+let { dir } = parse( process.mainModule.filename );
 
-dir = dir.replace (/\/(lib|test)$/, '');
+dir = dir.replace( /\/(lib|test)$/, '' );
 
-const pkg = require (join (dir, 'package.json'));
-const lib = require (join (__dirname, 'package.json'));
+const pkg = require( join( dir, 'package.json' ) );
+const lib = require( join( __dirname, 'package.json' ) );
 
 const isGithubAction = process.env.GITHUB_ACTIONS === 'true';
 
 const counters = {
   fail: 0,
   warn: 0,
-  startTime: Date.now (),
+  startTime: Date.now(),
 };
 
 const config = {
@@ -46,7 +46,7 @@ let onExitCallback;
  * @param   {string}  str    The string to alter
  */
 
-function colorStr (color, str) {
+function colorStr ( color, str ) {
   const colors = {
     red: '\u001b[31m',
     green: '\u001b[32m',
@@ -75,31 +75,31 @@ function colorStr (color, str) {
  * @param   {boolean}  [dontCount]   Don't count the fails
  */
 
-function log (type, str, dontCount) {
+function log ( type, str, dontCount ) {
   const types = {
     good: ['green', 'good'],
     info: ['cyan', 'info'],
   };
 
-  if (!str) {
+  if ( !str ) {
     str = type;
     type = 'plain';
   }
 
-  switch (type) {
+  switch ( type ) {
     case 'note':
-      console.log (colorStr ('bold', str));
+      console.log( colorStr( 'bold', str ) );
       break;
 
     case 'fail':
-      if (!dontCount) { counters.fail++; }
+      if ( !dontCount ) { counters.fail++; }
 
       /* istanbul ignore next */
-      if (isGithubAction) {
-        core.error ('    ' + str);
+      if ( isGithubAction ) {
+        core.error( '    ' + str );
       }
       else {
-        console.log (colorStr ('red', 'FAIL') + '       ' + str);
+        console.log( colorStr( 'red', 'FAIL' ) + '       ' + str );
       }
 
       break;
@@ -108,50 +108,50 @@ function log (type, str, dontCount) {
       counters.warn++;
 
       /* istanbul ignore next */
-      if (isGithubAction) {
-        core.warning ('  ' + str);
+      if ( isGithubAction ) {
+        core.warning( '  ' + str );
       }
       else {
-        console.log (colorStr ('yellow', 'warn') + '       ' + str);
+        console.log( colorStr( 'yellow', 'warn' ) + '       ' + str );
       }
 
       break;
 
     case 'error':
-      if (!dontCount) { counters.fail++; }
+      if ( !dontCount ) { counters.fail++; }
 
       /* istanbul ignore next */
-      if (isGithubAction) {
-        core.error ('    ' + str.message);
+      if ( isGithubAction ) {
+        core.error( '    ' + str.message );
         console.log();
       }
       else {
-        console.log (colorStr ('red', 'ERROR      ') + str.message + '\n');
+        console.log( colorStr( 'red', 'ERROR      ' ) + str.message + '\n' );
       }
 
-      console.dir (str, {
+      console.dir( str, {
         depth: null,
         colors: true,
-      });
+      } );
 
       console.log();
 
       break;
 
     case 'object':
-      console.dir (str, {
+      console.dir( str, {
         depth: null,
         colors: true,
-      });
+      } );
 
       break;
 
     case 'plain':
-      console.log (str);
+      console.log( str );
       break;
 
     default:
-      console.log (colorStr (types[type][0], types[type][1]) + '       ' + str);
+      console.log( colorStr( types[type][0], types[type][1] ) + '       ' + str );
       break;
   }
 }
@@ -167,13 +167,13 @@ function log (type, str, dontCount) {
  * @param   {int}   index  `queue[]` index
  */
 
-function doNext (index) {
-  const testF = testFunc (index);
-  const count = colorStr ('cyan', (index + 1) + '/' + queue.length);
-  const label = colorStr ('bold', queue [index].label);
+function doNext ( index ) {
+  const testF = testFunc( index );
+  const count = colorStr( 'cyan', ( index + 1 ) + '/' + queue.length );
+  const label = colorStr( 'bold', queue [index].label );
 
-  console.log (`\n\n${count}  ${label}\n`);
-  queue [index].runner (testF);
+  console.log( `\n\n${count}  ${label}\n` );
+  queue [index].runner( testF );
 }
 
 
@@ -186,53 +186,53 @@ function doNext (index) {
  * @param     {function}  [callback]  Called before next test: `(next)`
  */
 
-function done (callback) {
-  const timing = (Date.now() - counters.startTime) / 1000;
+function done ( callback ) {
+  const timing = ( Date.now() - counters.startTime ) / 1000;
   let ms = 0;
 
-  if (typeof callback === 'function') {
-    callback (next);
+  if ( typeof callback === 'function' ) {
+    callback( next );
   }
 
-  if (this.startTime) {
+  if ( this.startTime ) {
     ms = Date.now() - this.startTime;
 
     console.log();
 
     /* istanbul ignore next */
-    if (isGithubAction) {
-      log ('info', ms + ' ms');
+    if ( isGithubAction ) {
+      log( 'info', ms + ' ms' );
     }
     else {
-      log ('info', colorStr ('yellow', ms + ' ms'));
+      log( 'info', colorStr( 'yellow', ms + ' ms' ) );
     }
   }
 
   next++;
 
-  if (queue [next]) {
-    if (next && config.wait) {
-      setTimeout (() => doNext (next), config.wait);
+  if ( queue [next] ) {
+    if ( next && config.wait ) {
+      setTimeout( () => doNext( next ), config.wait );
       return;
     }
 
-    doNext (next);
+    doNext( next );
     return;
   }
 
   // That was the last one
-  console.log ('\n');
-  log ('info', colorStr ('yellow', counters.fail) + ' errors');
-  log ('info', colorStr ('yellow', counters.warn) + ' warnings');
-  console.log ();
-  log ('info', colorStr ('yellow', timing) + ' seconds');
-  console.log ();
+  console.log( '\n' );
+  log( 'info', colorStr( 'yellow', counters.fail ) + ' errors' );
+  log( 'info', colorStr( 'yellow', counters.warn ) + ' warnings' );
+  console.log();
+  log( 'info', colorStr( 'yellow', timing ) + ' seconds' );
+  console.log();
 
-  if (counters.fail) {
-    process.exit (1);
+  if ( counters.fail ) {
+    process.exit( 1 );
   }
   else {
-    process.exit (0);
+    process.exit( 0 );
   }
 }
 
@@ -246,36 +246,36 @@ function done (callback) {
  * @param   {mixed}   input  The value to check
  */
 
-function getType (input) {
-  if (input instanceof Date) {
+function getType ( input ) {
+  if ( input instanceof Date ) {
     return 'date';
   }
 
-  if (input instanceof RegExp) {
+  if ( input instanceof RegExp ) {
     return 'regexp';
   }
 
-  if (input instanceof Error) {
+  if ( input instanceof Error ) {
     return 'error';
   }
 
-  if (input instanceof Function) {
+  if ( input instanceof Function ) {
     return 'function';
   }
 
-  if (input instanceof Array) {
+  if ( input instanceof Array ) {
     return 'array';
   }
 
-  if (input instanceof Object) {
+  if ( input instanceof Object ) {
     return 'object';
   }
 
-  if (input === null) {
+  if ( input === null ) {
     return 'null';
   }
 
-  return (typeof input);
+  return ( typeof input );
 }
 
 
@@ -290,22 +290,22 @@ function getType (input) {
  * @param   {bool}    [noType]  Don't append ' (type)'
  */
 
-function typeStr (str, noType) {
-  const type = getType (str);
+function typeStr ( str, noType ) {
+  const type = getType( str );
   const doType = !noType ? ` (${type})` : '';
-  const typeMatch = type.match (/(string|boolean|number|date|regexp|array)/);
+  const typeMatch = type.match( /(string|boolean|number|date|regexp|array)/ );
 
   let length = '';
 
   // length
-  switch (type) {
+  switch ( type ) {
     case 'string':
     case 'array':
       length = ` (${str.length})`;
       break;
     case 'object':
     case 'error':
-      length = ' (' + Object.keys (str).length + ')';
+      length = ' (' + Object.keys( str ).length + ')';
       break;
     default:
       length = '';
@@ -313,18 +313,18 @@ function typeStr (str, noType) {
   }
 
   // parse special
-  if (type.match (/(object|array)/)) {
-    str = inspect (str, {
+  if ( type.match( /(object|array)/ ) ) {
+    str = inspect( str, {
       depth: null,
       colors: true,
-    });
+    } );
 
-    str = str.replace (/\n/g, ' ');
+    str = str.replace( /\n/g, ' ' );
 
-    if (str.length <= 50) {
-      str = colorStr ('magenta', str[0])
-        + str.slice (1, -1)
-        + colorStr ('magenta', str.slice (-1))
+    if ( str.length <= 50 ) {
+      str = colorStr( 'magenta', str[0] )
+        + str.slice( 1, -1 )
+        + colorStr( 'magenta', str.slice( -1 ) )
         + doType;
 
       return str;
@@ -334,23 +334,23 @@ function typeStr (str, noType) {
   }
 
   // parse function
-  if (type === 'function') {
-    str = inspect (str, {
+  if ( type === 'function' ) {
+    str = inspect( str, {
       colors: true,
-    });
+    } );
     str += '\u001b[0m';
 
     return str;
   }
 
   // parse rest
-  str = String (str);
+  str = String( str );
 
-  if (typeMatch && str.length && str.length <= 50) {
-    return colorStr ('magenta', str) + doType;
+  if ( typeMatch && str.length && str.length <= 50 ) {
+    return colorStr( 'magenta', str ) + doType;
   }
 
-  return colorStr ('magenta', type) + length;
+  return colorStr( 'magenta', type ) + length;
 }
 
 /* eslint-enable complexity */
@@ -373,34 +373,34 @@ function typeStr (str, noType) {
  * @param   {string}         describe.false  Override default describe if false
  */
 
-function output (level, what, result, describe) {
-  const state = (result.state === true) ? 'good' : level;
-  const typestrGood = typeStr (result.data, true);
-  const typestrFail = typeStr (result.data);
+function output ( level, what, result, describe ) {
+  const state = ( result.state === true ) ? 'good' : level;
+  const typestrGood = typeStr( result.data, true );
+  const typestrFail = typeStr( result.data );
 
   let str = '';
 
   // log line
   /* istanbul ignore next */
-  switch (state) {
-    case 'good': str = colorStr ('green', 'good'); break;
-    case 'fail': str = (!isGithubAction ? colorStr ('red', 'FAIL') : ''); break;
-    case 'warn': str = (!isGithubAction ? colorStr ('yellow', 'warn') : ''); break;
+  switch ( state ) {
+    case 'good': str = colorStr( 'green', 'good' ); break;
+    case 'fail': str = ( !isGithubAction ? colorStr( 'red', 'FAIL' ) : '' ); break;
+    case 'warn': str = ( !isGithubAction ? colorStr( 'yellow', 'warn' ) : '' ); break;
     // no default
   }
 
   /* istanbul ignore next */
-  if (isGithubAction && state.match (/^(fail|warn)$/)) {
+  if ( isGithubAction && state.match( /^(fail|warn)$/ ) ) {
     str += '  ';
   }
   else {
     str += '       ';
   }
 
-  str += colorStr ('blue', what) + ' ';
+  str += colorStr( 'blue', what ) + ' ';
 
   // describe result
-  if (result.state) {
+  if ( result.state ) {
     str += describe.true || typestrGood + ' is ' + describe;
   }
   else {
@@ -410,22 +410,22 @@ function output (level, what, result, describe) {
 
   // output in Github action
   /* istanbul ignore next */
-  if (isGithubAction) {
-    if (state === 'fail') {
-      core.error (str);
+  if ( isGithubAction ) {
+    if ( state === 'fail' ) {
+      core.error( str );
     }
-    else if (state === 'warn') {
-      core.warning (str);
+    else if ( state === 'warn' ) {
+      core.warning( str );
     }
     else {
-      console.log (str);
+      console.log( str );
     }
 
     return;
   }
 
   // output normal
-  console.log (str);
+  console.log( str );
 }
 
 
@@ -438,23 +438,23 @@ function output (level, what, result, describe) {
  * @param   {int}   [code]        Enforce exit status code if not fail
  */
 
-function processExit (fromProcess, code) {
+function processExit ( fromProcess, code ) {
   /* istanbul ignore next */
-  if (counters.fail) {
-    process.exit (1);
+  if ( counters.fail ) {
+    process.exit( 1 );
   }
   else {
-    process.exit (code || 0);
+    process.exit( code || 0 );
   }
 }
 
-process.on ('exit', (code) => {
-  if (typeof onExitCallback === 'function') {
-    onExitCallback (code);
+process.on( 'exit', ( code ) => {
+  if ( typeof onExitCallback === 'function' ) {
+    onExitCallback( code );
   }
 
-  processExit (true, code);
-});
+  processExit( true, code );
+} );
 
 
 /**
@@ -466,65 +466,65 @@ process.on ('exit', (code) => {
  */
 
 /* istanbul ignore next */
-function uncaughtException (err) {
-  log ('error', err);
+function uncaughtException ( err ) {
+  log( 'error', err );
 }
 
-process.on ('uncaughtException', uncaughtException);
+process.on( 'uncaughtException', uncaughtException );
 
 
 /**
  * Methods for test()
  */
 
-function testLog (level, str, dontCount) {
-  const typestr = typeStr (str);
-  const doDump = typestr.match (/(object|array)/) && typestr.match (/ \(\d+\)/);
+function testLog ( level, str, dontCount ) {
+  const typestr = typeStr( str );
+  const doDump = typestr.match( /(object|array)/ ) && typestr.match( / \(\d+\)/ );
 
-  if (typeof str === 'string') {
-    log (level, str, dontCount);
+  if ( typeof str === 'string' ) {
+    log( level, str, dontCount );
     return;
   }
 
-  log (level, typestr, dontCount);
+  log( level, typestr, dontCount );
 
-  if (doDump) {
-    log ('object', str, dontCount);
+  if ( doDump ) {
+    log( 'object', str, dontCount );
   }
 }
 
 /* istanbul ignore next */
 function unitTestsExit () {
-  testLog ('info', 'Exit process');
-  processExit (false);
+  testLog( 'info', 'Exit process' );
+  processExit( false );
   return unitTests;
 }
 
 unitTests = {
   done: done,
 
-  error: (str, dontCount) => {
-    log ('error', str, dontCount);
+  error: ( str, dontCount ) => {
+    log( 'error', str, dontCount );
     return unitTests;
   },
 
-  good: (str) => {
-    testLog ('good', str);
+  good: ( str ) => {
+    testLog( 'good', str );
     return unitTests;
   },
 
-  fail: (str, dontCount) => {
-    testLog ('fail', str, dontCount);
+  fail: ( str, dontCount ) => {
+    testLog( 'fail', str, dontCount );
     return unitTests;
   },
 
-  warn: (str) => {
-    testLog ('warn', str);
+  warn: ( str ) => {
+    testLog( 'warn', str );
     return unitTests;
   },
 
-  info: (str) => {
-    testLog ('info', str);
+  info: ( str ) => {
+    testLog( 'info', str );
     return unitTests;
   },
 
@@ -542,13 +542,13 @@ unitTests = {
  * @param   {mixed}   input  variable to test against
  */
 
-unitTests.isError = (level, what, input) => {
+unitTests.isError = ( level, what, input ) => {
   const result = {
-    state: getType (input) === 'error',
+    state: getType( input ) === 'error',
     data: input,
   };
 
-  output (level, what, result, 'an Error');
+  output( level, what, result, 'an Error' );
   return unitTests;
 };
 
@@ -564,17 +564,17 @@ unitTests.isError = (level, what, input) => {
  * @param   {string}  name   name of instance to test for
  */
 
-unitTests.isInstanceOf = (level, what, input, name) => {
+unitTests.isInstanceOf = ( level, what, input, name ) => {
   const result = {
     state: false,
     data: input,
   };
 
-  if (typeof input === 'function') {
-    result.state = !!~input.constructor.toString().match (/^\w+ ${name} /);
+  if ( typeof input === 'function' ) {
+    result.state = !!~input.constructor.toString().match( /^\w+ ${name} / );
   }
 
-  output (level, what, result, `an instance of ${name}`);
+  output( level, what, result, `an instance of ${name}` );
   return unitTests;
 };
 
@@ -589,17 +589,17 @@ unitTests.isInstanceOf = (level, what, input, name) => {
  * @param   {mixed}   input  variable to test against
  */
 
-unitTests.isClass = (level, what, input) => {
+unitTests.isClass = ( level, what, input ) => {
   const result = {
     state: false,
     data: input,
   };
 
-  if (typeof input === 'function') {
-    result.state = !!~input.constructor.toString().match (/^class /);
+  if ( typeof input === 'function' ) {
+    result.state = !!~input.constructor.toString().match( /^class / );
   }
 
-  output (level, what, result, 'a class');
+  output( level, what, result, 'a class' );
   return unitTests;
 };
 
@@ -614,13 +614,13 @@ unitTests.isClass = (level, what, input) => {
  * @param   {mixed}   input  variable to test against
  */
 
-unitTests.isObject = (level, what, input) => {
+unitTests.isObject = ( level, what, input ) => {
   const result = {
-    state: getType (input) === 'object',
+    state: getType( input ) === 'object',
     data: input,
   };
 
-  output (level, what, result, 'an Object');
+  output( level, what, result, 'an Object' );
   return unitTests;
 };
 
@@ -635,13 +635,13 @@ unitTests.isObject = (level, what, input) => {
  * @param   {mixed}   input  variable to test against
  */
 
-unitTests.isArray = (level, what, input) => {
+unitTests.isArray = ( level, what, input ) => {
   const result = {
-    state: getType (input) === 'array',
+    state: getType( input ) === 'array',
     data: input,
   };
 
-  output (level, what, result, 'an Array');
+  output( level, what, result, 'an Array' );
   return unitTests;
 };
 
@@ -656,13 +656,13 @@ unitTests.isArray = (level, what, input) => {
  * @param   {mixed}   input  variable to test againstuncaughtException
  */
 
-unitTests.isString = (level, what, input) => {
+unitTests.isString = ( level, what, input ) => {
   const result = {
-    state: getType (input) === 'string',
+    state: getType( input ) === 'string',
     data: input,
   };
 
-  output (level, what, result, 'a String');
+  output( level, what, result, 'a String' );
   return unitTests;
 };
 
@@ -677,13 +677,13 @@ unitTests.isString = (level, what, input) => {
  * @param   {mixed}   input  variable to test against
  */
 
-unitTests.isNumber = (level, what, input) => {
+unitTests.isNumber = ( level, what, input ) => {
   const result = {
-    state: getType (input) === 'number',
+    state: getType( input ) === 'number',
     data: input,
   };
 
-  output (level, what, result, 'a Number');
+  output( level, what, result, 'a Number' );
   return unitTests;
 };
 
@@ -698,13 +698,13 @@ unitTests.isNumber = (level, what, input) => {
  * @param   {mixed}   input  variable to test against
  */
 
-unitTests.isUndefined = (level, what, input) => {
+unitTests.isUndefined = ( level, what, input ) => {
   const result = {
-    state: getType (input) === 'undefined',
+    state: getType( input ) === 'undefined',
     data: input,
   };
 
-  output (level, what, result, 'Undefined');
+  output( level, what, result, 'Undefined' );
   return unitTests;
 };
 
@@ -719,13 +719,13 @@ unitTests.isUndefined = (level, what, input) => {
  * @param   {mixed}   input  variable to test against
  */
 
-unitTests.isNull = (level, what, input) => {
+unitTests.isNull = ( level, what, input ) => {
   const result = {
     state: input === null,
     data: input,
   };
 
-  output (level, what, result, 'Null');
+  output( level, what, result, 'Null' );
   return unitTests;
 };
 
@@ -740,13 +740,13 @@ unitTests.isNull = (level, what, input) => {
  * @param   {mixed}   input  variable to test against
  */
 
-unitTests.isNaN = (level, what, input) => {
+unitTests.isNaN = ( level, what, input ) => {
   const result = {
-    state: isNaN (input),
+    state: isNaN( input ),
     data: input,
   };
 
-  output (level, what, result, 'NaN');
+  output( level, what, result, 'NaN' );
   return unitTests;
 };
 
@@ -761,13 +761,13 @@ unitTests.isNaN = (level, what, input) => {
  * @param   {mixed}   input  variable to test against
  */
 
-unitTests.isBoolean = (level, what, input) => {
+unitTests.isBoolean = ( level, what, input ) => {
   const result = {
-    state: getType (input) === 'boolean',
+    state: getType( input ) === 'boolean',
     data: input,
   };
 
-  output (level, what, result, 'a Boolean');
+  output( level, what, result, 'a Boolean' );
   return unitTests;
 };
 
@@ -782,13 +782,13 @@ unitTests.isBoolean = (level, what, input) => {
  * @param   {mixed}   input  variable to test against
  */
 
-unitTests.isFunction = (level, what, input) => {
+unitTests.isFunction = ( level, what, input ) => {
   const result = {
-    state: getType (input) === 'function',
+    state: getType( input ) === 'function',
     data: input,
   };
 
-  output (level, what, result, 'a Function');
+  output( level, what, result, 'a Function' );
   return unitTests;
 };
 
@@ -803,13 +803,13 @@ unitTests.isFunction = (level, what, input) => {
  * @param   {mixed}   input  variable to test against
  */
 
-unitTests.isDate = (level, what, input) => {
+unitTests.isDate = ( level, what, input ) => {
   const result = {
-    state: getType (input) === 'date',
+    state: getType( input ) === 'date',
     data: input,
   };
 
-  output (level, what, result, 'a Date');
+  output( level, what, result, 'a Date' );
   return unitTests;
 };
 
@@ -825,9 +825,9 @@ unitTests.isDate = (level, what, input) => {
  * @param   {mixed}   two    variable to test against
  */
 
-unitTests.isExactly = (level, what, one, two) => {
-  const typestrOne = typeStr (one);
-  const typestrTwo = typeStr (two);
+unitTests.isExactly = ( level, what, one, two ) => {
+  const typestrOne = typeStr( one );
+  const typestrTwo = typeStr( two );
   const result = {
     state: one === two,
     data: two,
@@ -838,7 +838,7 @@ unitTests.isExactly = (level, what, one, two) => {
     false: typestrOne + ' should be exactly ' + typestrTwo,
   };
 
-  output (level, what, result, describe);
+  output( level, what, result, describe );
   return unitTests;
 };
 
@@ -854,9 +854,9 @@ unitTests.isExactly = (level, what, one, two) => {
  * @param   {mixed}   two    variable to test against
  */
 
-unitTests.isNot = (level, what, one, two) => {
-  const typestrOne = typeStr (one);
-  const typestrTwo = typeStr (two);
+unitTests.isNot = ( level, what, one, two ) => {
+  const typestrOne = typeStr( one );
+  const typestrTwo = typeStr( two );
   const result = {
     state: one !== two,
     data: two,
@@ -867,7 +867,7 @@ unitTests.isNot = (level, what, one, two) => {
     false: typestrOne + ' should not be equal to ' + typestrTwo,
   };
 
-  output (level, what, result, describe);
+  output( level, what, result, describe );
   return unitTests;
 };
 
@@ -882,13 +882,13 @@ unitTests.isNot = (level, what, one, two) => {
  * @param   {mixed}   input  variable to test against
  */
 
-unitTests.isRegexp = (level, what, input) => {
+unitTests.isRegexp = ( level, what, input ) => {
   const result = {
-    state: getType (input) === 'regexp',
+    state: getType( input ) === 'regexp',
     data: input,
   };
 
-  output (level, what, result, 'a RegExp');
+  output( level, what, result, 'a RegExp' );
   return unitTests;
 };
 
@@ -904,11 +904,11 @@ unitTests.isRegexp = (level, what, input) => {
  * @param   {mixed}   regex  regular expression to match
  */
 
-unitTests.isRegexpMatch = (level, what, input, regex) => {
-  const typestrOne = typeStr (input);
-  const typestrTwo = typeStr (regex);
+unitTests.isRegexpMatch = ( level, what, input, regex ) => {
+  const typestrOne = typeStr( input );
+  const typestrTwo = typeStr( regex );
   const result = {
-    state: !!input.match (regex),
+    state: !!input.match( regex ),
     data: input,
   };
 
@@ -917,7 +917,7 @@ unitTests.isRegexpMatch = (level, what, input, regex) => {
     false: typestrOne + ' should be matching ' + typestrTwo,
   };
 
-  output (level, what, result, describe);
+  output( level, what, result, describe );
   return unitTests;
 };
 
@@ -934,22 +934,22 @@ unitTests.isRegexpMatch = (level, what, input, regex) => {
  * @param   {mixed}   two       variable to test against
  */
 
-unitTests.isCondition = (level, what, one, operator, two) => {
-  const typestrOne = typeStr (one);
-  const typestrTwo = typeStr (two);
+unitTests.isCondition = ( level, what, one, operator, two ) => {
+  const typestrOne = typeStr( one );
+  const typestrTwo = typeStr( two );
   const result = {
     state: false,
     data: two,
   };
 
-  const str = typestrOne + ' ' + colorStr ('yellow', operator) + ' ' + typestrTwo;
+  const str = typestrOne + ' ' + colorStr( 'yellow', operator ) + ' ' + typestrTwo;
 
   const describe = {
     true: str,
     false: str,
   };
 
-  switch (operator) {
+  switch ( operator ) {
     case '<': result.state = one < two; break;
     case '>': result.state = one > two; break;
     case '<=': result.state = one <= two; break;
@@ -957,7 +957,7 @@ unitTests.isCondition = (level, what, one, operator, two) => {
     // no default
   }
 
-  output (level, what, result, describe);
+  output( level, what, result, describe );
   return unitTests;
 };
 
@@ -972,33 +972,33 @@ unitTests.isCondition = (level, what, one, operator, two) => {
  * @param   {mixed}   input  variable to test against
  */
 
-unitTests.isEmpty = (level, what, input) => {
-  const type = getType (input);
+unitTests.isEmpty = ( level, what, input ) => {
+  const type = getType( input );
   const result = {
     state: false,
     data: input,
   };
 
-  if (type === 'undefined') {
+  if ( type === 'undefined' ) {
     result.state = true;
   }
-  else if (input === null) {
+  else if ( input === null ) {
     result.state = true;
   }
-  else if (type === 'string' && !input) {
+  else if ( type === 'string' && !input ) {
     result.state = true;
   }
-  else if (type === 'object' && !Object.keys (input).length) {
+  else if ( type === 'object' && !Object.keys( input ).length ) {
     result.state = true;
   }
-  else if (type === 'array' && !input.length) {
+  else if ( type === 'array' && !input.length ) {
     result.state = true;
   }
-  else if (type === 'error' && !Object.keys (input).length && !input.message) {
+  else if ( type === 'error' && !Object.keys( input ).length && !input.message ) {
     result.state = true;
   }
 
-  output (level, what, result, 'Empty');
+  output( level, what, result, 'Empty' );
   return unitTests;
 };
 
@@ -1013,55 +1013,55 @@ unitTests.isEmpty = (level, what, input) => {
  * @param   {mixed}   input  variable to test against
  */
 
-unitTests.isNotEmpty = (level, what, input) => {
-  const type = getType (input);
+unitTests.isNotEmpty = ( level, what, input ) => {
+  const type = getType( input );
   const result = {
     state: true,
     data: input,
   };
 
-  if (type === 'undefined') {
+  if ( type === 'undefined' ) {
     result.state = false;
   }
-  else if (input === null) {
+  else if ( input === null ) {
     result.state = false;
   }
-  else if (type === 'string' && !input) {
+  else if ( type === 'string' && !input ) {
     result.state = false;
   }
-  else if (type === 'object' && !Object.keys (input).length) {
+  else if ( type === 'object' && !Object.keys( input ).length ) {
     result.state = false;
   }
-  else if (type === 'array' && !input.length) {
+  else if ( type === 'array' && !input.length ) {
     result.state = false;
   }
-  else if (type === 'error' && !Object.keys (input).length && !input.message) {
+  else if ( type === 'error' && !Object.keys( input ).length && !input.message ) {
     result.state = false;
   }
 
-  output (level, what, result, 'not Empty');
+  output( level, what, result, 'not Empty' );
   return unitTests;
 };
 
 
-function test (err, dontCount) {
-  if (err) {
-    log ('error', err, dontCount);
+function test ( err, dontCount ) {
+  if ( err ) {
+    log( 'error', err, dontCount );
   }
 
   return unitTests;
 }
 
 
-testFunc = (index) => {
+testFunc = ( index ) => {
   const ut = unitTests;
 
   ut.queueIndex = index;
   ut.startTime = Date.now();
 
-  return (err, dontCount) => {
-    if (err) {
-      log ('error', err, dontCount);
+  return ( err, dontCount ) => {
+    if ( err ) {
+      log( 'error', err, dontCount );
     }
 
     return ut;
@@ -1077,18 +1077,18 @@ testFunc = (index) => {
  * @param   {int}  wait  Wait time between tests, in ms (1000 = 1 sec)
  */
 
-function run (wait) {
+function run ( wait ) {
   config.wait = process.env.DOTEST_WAIT || wait || 0;
 
-  if (!config.noConsole && next === -1) {
-    log ('note', 'Running tests...\n');
-    log ('note', 'Package name:     ' + colorStr ('yellow', pkg.name));
-    log ('note', 'Package version:  ' + colorStr ('yellow', pkg.version));
-    log ('note', 'Node.js version:  ' + colorStr ('yellow', process.versions.node));
-    log ('note', 'dotest version:   ' + colorStr ('yellow', lib.version));
+  if ( !config.noConsole && next === -1 ) {
+    log( 'note', 'Running tests...\n' );
+    log( 'note', 'Package name:     ' + colorStr( 'yellow', pkg.name ) );
+    log( 'note', 'Package version:  ' + colorStr( 'yellow', pkg.version ) );
+    log( 'note', 'Node.js version:  ' + colorStr( 'yellow', process.versions.node ) );
+    log( 'note', 'dotest version:   ' + colorStr( 'yellow', lib.version ) );
   }
 
-  done ();
+  done();
 }
 
 
@@ -1101,11 +1101,11 @@ function run (wait) {
  * @param   {function}  runner  The function with test code, `(test) => { test().isObject(...); }`
  */
 
-function add (label, runner) {
-  queue.push ({
+function add ( label, runner ) {
+  queue.push( {
     label,
     runner,
-  });
+  } );
 }
 
 
@@ -1117,7 +1117,7 @@ function add (label, runner) {
  * @param     {function}  callback  `(code)`
  */
 
-function onExit (callback) {
+function onExit ( callback ) {
   onExitCallback = callback;
 }
 
@@ -1132,11 +1132,11 @@ function onExit (callback) {
  * @param {string}         [value]             Param value if name is a string
  */
 
-function setConfig (name, value) {
+function setConfig ( name, value ) {
   let key;
 
-  if (name instanceof Object) {
-    for (key in name) {
+  if ( name instanceof Object ) {
+    for ( key in name ) {
       config [key] = name [key];
     }
 

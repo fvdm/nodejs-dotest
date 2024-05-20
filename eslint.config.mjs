@@ -38,6 +38,7 @@ export default [
       }],
       'eol-last': 'error',
       'eqeqeq': 'error',
+      'func-call-spacing': ['error', 'never'],
       'func-style': 'off',
       'guard-for-in': 'off',
       'handle-callback-err': ['error', '^(e|er|err|error)[0-9]{1,2}?$'],
@@ -147,7 +148,7 @@ export default [
       }],
       'space-before-blocks': ['error', 'always'],
       'space-before-function-paren': ['error', 'always'],
-      'space-in-parens': ['error', 'never'],
+      'space-in-parens': ['error', 'always'],
       'space-infix-ops': 'error',
       'space-unary-ops': ['error', {
         'words': true,

@@ -21,51 +21,51 @@ your test.js, coverage and report to Coveralls.io when running on Travis CI.
 
 ```js
 // Load test runner and your app
-const doTest = require ('dotest');
-const app = require ('./');
+const doTest = require( 'dotest' );
+const app = require( './' );
 
 // Check app interface
-doTest.add ('App interface', test => {
+doTest.add( 'App interface', test => {
   test()
-    .isFunction ('fail', 'methodOne', app.methodOne)
-    .isObject ('fail', 'sub', app.sub)
-    .isFunction ('fail', 'sub.methodTwo', app.sub.methodTwo)
+    .isFunction( 'fail', 'methodOne', app.methodOne )
+    .isObject( 'fail', 'sub', app.sub )
+    .isFunction( 'fail', 'sub.methodTwo', app.sub.methodTwo )
     .done()
   ;
-});
+} );
 
 // Check method response
-doTest.add ('App methodOne', test => {
-  app.methodOne ((err, data) => {
-    test (err)
-      .isObject ('fail', 'Callback data', data)
-      .isArray ('fail', 'data.music', data.music)
-      .isNotEmpty ('warn', 'data.music', data.music)
+doTest.add( 'App methodOne', test => {
+  app.methodOne( ( err, data ) => {
+    test( err )
+      .isObject( 'fail', 'Callback data', data )
+      .isArray( 'fail', 'data.music', data.music )
+      .isNotEmpty( 'warn', 'data.music', data.music )
       .done()
     ;
-  });
-});
+  } );
+} );
 
 // Check promise
-doTest.add ('Promise good', async test => {
+doTest.add( 'Promise good', async test => {
   let error;
   let data;
 
   try {
     data = await myPromise();
   }
-  catch (err) {
+  catch ( err ) {
     error = err;
   }
 
-  test (error)
-    .isObject ('fail', 'data', data);
+  test( error )
+    .isObject( 'fail', 'data', data );
     .done()
   ;
-});
+} );
 
 // Run the tests
-doTest.run ();
+doTest.run();
 ```
 
 **package.json**
@@ -125,12 +125,12 @@ Add a new test to the queue.
 
 
 ```js
-doTest.add ('App interface', test => {
+doTest.add( 'App interface', test => {
   test()
-    .isArray ('fail', 'my array', [])
+    .isArray( 'fail', 'my array', [] )
     .done()
   ;
-});
+} );
 ```
 
 
@@ -150,7 +150,7 @@ param  | type   | default | description
 doTest.run();
 
 // Or wait 2 seconds
-doTest.run (2000);
+doTest.run( 2000 );
 ```
 
 
@@ -184,7 +184,7 @@ where `error` and `fail` also cause the script to fail.
 
 ```js
 // Bold text
-doTest.log ('note', 'Hello world');
+doTest.log( 'note', 'Hello world' );
 ```
 
 
@@ -213,20 +213,20 @@ You can concat the check functions for clean code.
 
 ```js
 // Using the method
-doTest.add ('App interface', () => {
+doTest.add( 'App interface', () => {
   doTest.test()
-    .isObject ('fail', 'Callback data', data)
+    .isObject( 'fail', 'Callback data', data )
     .done()
   ;
-});
+} );
 
 // Or using the shortcut
-doTest.add ('App interface', test => {
+doTest.add( 'App interface', test => {
   test()
-    .isObject ('fail', 'Callback data', data)
+    .isObject( 'fail', 'Callback data', data )
     .done()
   ;
-});
+} );
 ```
 
 
@@ -248,7 +248,7 @@ but `.exit()` also ends the whole script.
 
 ```js
 test()
-  .isArray ('fail', 'data', [])
+  .isArray( 'fail', 'data', [] )
   .exit()
 ;
 ```
@@ -265,7 +265,7 @@ and the full value of `message` dumped right below.
 
 ```js
 test()
-  .info ({ hello: 'world' })
+  .info( { hello: 'world' } )
   .done()
 ;
 
@@ -286,7 +286,7 @@ and the full value of `message` dumped right below.
 
 ```js
 test()
-  .good ('It works great')
+  .good( 'It works great' )
   .done()
 ;
 
@@ -306,7 +306,7 @@ and the full value of `message` dumped right below.
 
 ```js
 test()
-  .warn ('Hmm something odd happened')
+  .warn( 'Hmm something odd happened' )
   .done()
 ;
 
@@ -326,7 +326,7 @@ and the full value of `message` dumped right below.
 
 ```js
 test()
-  .fail ('We have a problem')
+  .fail( 'We have a problem' )
   .done()
 ;
 
@@ -341,10 +341,10 @@ test()
 Output 'ERROR' log line with dump and stack trace.
 
 ```js
-const err = new Error ('Oops');
+const err = new Error( 'Oops' );
 
 test()
-  .error (err)
+  .error( err )
   .done()
 ;
 
@@ -371,7 +371,7 @@ input | mixed  | The variable to check
 
 ```js
 test()
-  .isError ('fail', 'My data', data)
+  .isError( 'fail', 'My data', data )
   .done()
 ;
 ```
@@ -392,7 +392,7 @@ input | mixed  | The variable to check
 
 ```js
 test()
-  .isObject ('fail', 'My data', data)
+  .isObject( 'fail', 'My data', data )
   .done()
 ;
 ```
@@ -413,7 +413,7 @@ input | mixed  | The variable to check
 
 ```js
 test()
-  .isArray ('fail', 'My data', data)
+  .isArray( 'fail', 'My data', data )
   .done()
 ;
 ```
@@ -434,7 +434,7 @@ input | mixed  | The variable to check
 
 ```js
 test()
-  .isString ('fail', 'My data', data)
+  .isString( 'fail', 'My data', data )
   .done()
 ;
 ```
@@ -455,7 +455,7 @@ input | mixed  | The variable to check
 
 ```js
 test()
-  .isNumber ('fail', 'My data', data)
+  .isNumber( 'fail', 'My data', data )
   .done()
 ;
 ```
@@ -475,9 +475,9 @@ input | mixed  | The variable to check
 
 
 ```js
-function (err, data) {
+function ( err, data ) {
   test()
-    .isUndefined ('warn', 'My data', data)
+    .isUndefined( 'warn', 'My data', data )
     .done()
   ;
 }
@@ -498,9 +498,9 @@ input | mixed  | The variable to check
 
 
 ```js
-function (err, data) {
+function ( err, data ) {
   test()
-    .isNull ('warn', 'My data', data)
+    .isNull( 'warn', 'My data', data )
     .done()
   ;
 }
@@ -521,9 +521,9 @@ input | mixed  | The variable to check
 
 
 ```js
-function (err, data) {
+function ( err, data ) {
   test()
-    .isNaN ('warn', 'My data', data)
+    .isNaN( 'warn', 'My data', data )
     .done()
   ;
 }
@@ -545,7 +545,7 @@ input | mixed  | The variable to check
 
 ```js
 test()
-  .isBoolean ('fail', 'My data', data)
+  .isBoolean( 'fail', 'My data', data )
   .done()
 ;
 ```
@@ -566,7 +566,7 @@ input | mixed  | The variable to check
 
 ```js
 test()
-  .isFunction ('fail', 'My data', data)
+  .isFunction( 'fail', 'My data', data )
   .done()
 ;
 ```
@@ -589,7 +589,7 @@ input | mixed  | The variable to check
 const myDate = new Date();
 
 test()
-  .isDate ('fail', 'My data', myDate)
+  .isDate( 'fail', 'My data', myDate )
   .done()
 ;
 ```
@@ -611,7 +611,7 @@ two   | mixed  | The variable to check against
 
 ```js
 test()
-  .isExactly ('fail', 'My data', 'foo', 'bar')
+  .isExactly( 'fail', 'My data', 'foo', 'bar' )
   .done()
 ;
 ```
@@ -634,7 +634,7 @@ two      | mixed  | Variable to test against
 
 ```js
 test()
-  .isCondition ('fail', 'My data', 1, '<', 2)
+  .isCondition( 'fail', 'My data', 1, '<', 2 )
   .done()
 ;
 ```
@@ -644,7 +644,7 @@ test()
 **( level, what, input )**
 
 Check if `input` is _undefined_, _null_, or an empty _string_, _object_, _array_ or _Error_.
-In case of _Error_ the `input.message` and `Object.keys (input)` are checked.
+In case of _Error_ the `input.message` and `Object.keys( input )` are checked.
 
 
 param | type   | description
@@ -657,7 +657,7 @@ input | mixed  | The variable to check
 ```js
 // Object is empty
 test()
-  .isEmpty ('fail', 'My data', {})
+  .isEmpty( 'fail', 'My data', {} )
   .done()
 ;
 ```
@@ -667,7 +667,7 @@ test()
 **( level, what, input )**
 
 Check if `input` is not _undefined_, _null_, or an empty _string_, _object_, _array_ or _Error_.
-In case of _Error_ the `input.message` and `Object.keys (input)` are checked.
+In case of _Error_ the `input.message` and `Object.keys( input )` are checked.
 
 
 param | type   | description
@@ -680,7 +680,7 @@ input | mixed  | The variable to check
 ```js
 // Object is not empty
 test()
-  .isNotEmpty ('fail', 'My data', { foo: 'bar' })
+  .isNotEmpty( 'fail', 'My data', { foo: 'bar' } )
   .done()
 ;
 ```
