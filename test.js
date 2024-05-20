@@ -113,7 +113,7 @@ doTest.add( 'Methods', ( test, fake ) => {
     .isNaN( 'fail', 'test() .isNaN', NaN )
     .isBoolean( 'fail', 'test() .isBoolean', true )
     .isFunction( 'fail', 'test() .isFunction', TestFunction )
-    .isFunction( 'fail', 'test() .isAsyncFunction', TestAsyncFunction )
+    .isAsyncFunction( 'fail', 'test() .isAsyncFunction', TestAsyncFunction )
     .isDate( 'fail', 'test() .isDate', new Date() )
     .isExactly( 'fail', 'test() .isExactly', ':)', ':)' )
     .isNot( 'fail', 'test() .isNot', 'a', 'b' )
