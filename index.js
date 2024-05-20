@@ -493,6 +493,13 @@ function testLog (level, str, dontCount) {
   }
 }
 
+/* istanbul ignore next */
+function unitTestsExit () {
+  testLog ('info', 'Exit process');
+  processExit (false);
+  return unitTests;
+}
+
 unitTests = {
   done: done,
 
@@ -521,12 +528,7 @@ unitTests = {
     return unitTests;
   },
 
-  /* istanbul ignore next */
-  exit: () => {
-    testLog ('info', 'Exit process');
-    processExit (false);
-    return unitTests;
-  },
+  exit: unitTestsExit,
 };
 
 
