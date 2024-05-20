@@ -260,6 +260,10 @@ function getType ( input ) {
   }
 
   if ( input instanceof Function ) {
+    if ( input.constructor.name === 'AsyncFunction' ) {
+      return 'asyncfunction';
+    }
+
     return 'function';
   }
 
@@ -783,12 +787,34 @@ unitTests.isBoolean = ( level, what, input ) => {
  */
 
 unitTests.isFunction = ( level, what, input ) => {
+  const type = getType( input );
   const result = {
-    state: getType( input ) === 'function',
+    state: type === 'function' || type === 'asyncfunction',
     data: input,
   };
 
   output( level, what, result, 'a Function' );
+  return unitTests;
+};
+
+
+/**
+ * Test for Async Function
+ *
+ * @return  {object}         unitTests
+ *
+ * @param   {string}  level  fail, warn
+ * @param   {string}  what   describe input data, i.e. 'data.sub'
+ * @param   {mixed}   input  variable to test against
+ */
+
+unitTests.isAsyncFunction = ( level, what, input ) => {
+  const result = {
+    state: getType( input ) === 'asyncfunction',
+    data: input,
+  };
+
+  output( level, what, result, 'an AsyncFunction' );
   return unitTests;
 };
 

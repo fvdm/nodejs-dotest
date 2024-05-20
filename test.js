@@ -90,6 +90,7 @@ doTest.add( 'Methods', ( test, fake ) => {
   const colorMatch = '\u001b[35mmagenta\u001b[0m';
   /* istanbul ignore next */
   const TestFunction = () => {};
+  const TestAsyncFunction = async () => {};
 
   doTest.log( '.log() This is a plain (default) message' );
   doTest.log( '.log() This is a plain (preset) message' );
@@ -112,6 +113,7 @@ doTest.add( 'Methods', ( test, fake ) => {
     .isNaN( 'fail', 'test() .isNaN', NaN )
     .isBoolean( 'fail', 'test() .isBoolean', true )
     .isFunction( 'fail', 'test() .isFunction', TestFunction )
+    .isFunction( 'fail', 'test() .isAsyncFunction', TestAsyncFunction )
     .isDate( 'fail', 'test() .isDate', new Date() )
     .isExactly( 'fail', 'test() .isExactly', ':)', ':)' )
     .isNot( 'fail', 'test() .isNot', 'a', 'b' )

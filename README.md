@@ -572,6 +572,27 @@ test()
 ```
 
 
+### test() .isAsyncFunction
+**( level, what, input )**
+
+Check if `input` is an instance of _AsyncFunction_.
+
+
+param | type   | description
+:-----|:-------|:-----------
+level | string | Either `fail` or `warn`
+what  | string | Text to prepend to check result
+input | mixed  | The variable to check
+
+
+```js
+test()
+  .isAsyncFunction( 'fail', 'My data', data )
+  .done()
+;
+```
+
+
 ### test() .isDate
 **( level, what, input )**
 
