@@ -338,7 +338,7 @@ function typeStr ( str, noType ) {
   }
 
   // parse function
-  if ( type === 'function' ) {
+  if ( type === 'function' || type === 'asyncfunction' ) {
     str = inspect( str, {
       colors: true,
     } );
