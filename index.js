@@ -59,7 +59,7 @@ function colorStr ( color, str ) {
     plain: '\u001b[0m',
   };
 
-  return colors [color] + str + colors.plain;
+  return colors[color] + str + colors.plain;
 }
 
 
@@ -170,10 +170,10 @@ function log ( type, str, dontCount ) {
 function doNext ( index ) {
   const testF = testFunc( index );
   const count = colorStr( 'cyan', ( index + 1 ) + '/' + queue.length );
-  const label = colorStr( 'bold', queue [index].label );
+  const label = colorStr( 'bold', queue[index].label );
 
   console.log( `\n\n${count}  ${label}\n` );
-  queue [index].runner( testF );
+  queue[index].runner( testF );
 }
 
 
@@ -210,7 +210,7 @@ function done ( callback ) {
 
   next++;
 
-  if ( queue [next] ) {
+  if ( queue[next] ) {
     if ( next && config.wait ) {
       setTimeout( () => doNext( next ), config.wait );
       return;
@@ -1163,13 +1163,13 @@ function setConfig ( name, value ) {
 
   if ( name instanceof Object ) {
     for ( key in name ) {
-      config [key] = name [key];
+      config[key] = name[key];
     }
 
     return config;
   }
 
-  config [name] = value;
+  config[name] = value;
   return config;
 }
 
