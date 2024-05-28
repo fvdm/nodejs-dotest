@@ -92,7 +92,7 @@ elif [[ -x "$nycBin" ]]; then
   node test.js || result=1
 
   # Submit coverage to Coveralls.io
-  if [[ "$TRAVIS" == "true" ]]; then
+  if [[ "$CI" == "true" ]]; then
     if [[ -x "$coverallsBin" ]]; then
       cd "$libpath"
 
