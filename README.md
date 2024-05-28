@@ -12,8 +12,6 @@ your test.js, coverage and report to Coveralls.io when running on Travis CI.
 * When it detects Travis CI it will also submit the coverage report to [Coveralls.io](https://coveralls.io)
 * In case it runs in a Github action the warning, fail and error lines are highlighted.
 
-- [Changelog](https://github.com/fvdm/nodejs-dotest/blob/master/CHANGELOG.md)
-
 
 ## Example
 
