@@ -810,7 +810,7 @@ unitTests.isNormalFunction = ( level, what, input ) => {
 
   output( level, what, result, 'a normal Function' );
   return unitTests;
-};   
+};
 
 
 /**
