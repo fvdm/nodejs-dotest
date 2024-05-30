@@ -552,6 +552,27 @@ test()
 ### test() .isFunction
 **( level, what, input )**
 
+Check if `input` is an instance of _Function_ or _AsyncFunction_.
+
+
+param | type   | description
+:-----|:-------|:-----------
+level | string | Either `fail` or `warn`
+what  | string | Text to prepend to check result
+input | mixed  | The variable to check
+
+
+```js
+test()
+  .isFunction( 'fail', 'My data', data )
+  .done()
+;
+```
+
+
+### test() .isNormalFunction
+**( level, what, input )**
+
 Check if `input` is an instance of _Function_.
 
 
