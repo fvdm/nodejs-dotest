@@ -114,6 +114,7 @@ doTest.add( 'Methods', ( test, fake ) => {
     .isBoolean( 'fail', 'test() .isBoolean', true )
     .isFunction( 'fail', 'test() .isFunction - normal', TestFunction )
     .isFunction( 'fail', 'test() .isFunction - async', TestAsyncFunction )
+    .isNormalFunction( 'fail', 'test() .isNormalFunction', TestFunction ) 
     .isAsyncFunction( 'fail', 'test() .isAsyncFunction', TestAsyncFunction )
     .isDate( 'fail', 'test() .isDate', new Date() )
     .isExactly( 'fail', 'test() .isExactly', ':)', ':)' )

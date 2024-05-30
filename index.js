@@ -799,6 +799,21 @@ unitTests.isFunction = ( level, what, input ) => {
 
 
 /**
+ * Test for normal (non-async) Function
+ */
+
+unitTests.isNormalFunction = ( level, what, input ) => {
+  const result = {
+    state: getType( input ) === 'function',
+    data: input,
+  };
+
+  output( level, what, result, 'a normal Function' );
+  return unitTests;
+};   
+
+
+/**
  * Test for Async Function
  *
  * @return  {object}         unitTests
