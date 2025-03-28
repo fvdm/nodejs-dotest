@@ -28,12 +28,13 @@
   },
   "dependencies": {
     "@actions/core": "^1",
+    "@stylistic/eslint-plugin-js": "^4",
     "coveralls": "^3",
     "eslint": "^9",
     "nyc": "^17"
   },
   "engines": {
-    "node": ">=12"
+    "node": ">=20"
   },
   "keywords": [
     "coverage",
