@@ -1,7 +1,7 @@
 /*
 Name:           doTest - Unit tests runner
 Description:    Yet another unit test runner for Node.js
-Author:         Franklin van de Meent (https://frankl.in)
+Author:         Franklin (https://frankl.in)
 Source & docs:  https://github.com/fvdm/nodejs-dotest
 Feedback:       https://github.com/fvdm/nodejs-dotest/issues
 License:        Unlicense (public domain, see LICENSE file)
