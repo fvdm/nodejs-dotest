@@ -80,6 +80,7 @@ elif [[ -x "$nycBin" ]]; then
   --functions=$functionCoverage \
   --statements=$statementCoverage \
   --all \
+  --exclude='**/eslint.config.js' \
   --exclude='**/eslint.config.mjs' \
   --exclude='**/test.js' \
   --exclude='**/example.js' \
