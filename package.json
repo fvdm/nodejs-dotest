@@ -28,10 +28,10 @@
   },
   "dependencies": {
     "@actions/core": "^1",
+    "@eslint/js": "^9",
     "@stylistic/eslint-plugin-js": "^4",
     "coveralls": "^3",
     "globals": "^16",
-    "eslint/js": "^9",
     "nyc": "^17"
   },
   "engines": {
