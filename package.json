@@ -27,7 +27,7 @@
     "url": "https://github.com/fvdm/nodejs-dotest/issues"
   },
   "dependencies": {
-    "@actions/core": "^1",
+    "@actions/core": "^2",
     "@eslint/js": "^9",
     "@stylistic/eslint-plugin-js": "^4",
     "coveralls": "^3",
