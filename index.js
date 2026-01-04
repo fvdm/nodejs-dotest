@@ -532,6 +532,11 @@ unitTests = {
     return unitTests;
   },
 
+  object: ( obj ) => {
+    log( 'object', obj );
+    return unitTests;
+  }, 
+
   exit: unitTestsExit,
 };
 
