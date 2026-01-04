@@ -82,7 +82,9 @@ elif [[ -x "$nycBin" ]]; then
   --all \
   --exclude='**/eslint.config.js' \
   --exclude='**/eslint.config.mjs' \
+  --exclude='**/preinstall.js' \
   --exclude='**/test.js' \
+  --exclude='**/testing/**' \
   --exclude='**/example.js' \
   --exclude='**/coverage/**' \
   --exclude='**/packages/**' \
