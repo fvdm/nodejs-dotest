@@ -101,6 +101,8 @@ doTest.add( 'Methods', ( test, fake ) => {
 
   doTest.test()
     .info( '.length: ' + doTest.length )
+    .object( { example: 'data' } )
+    .object( [ 'world', 123 ] )
     .isError( 'fail', 'test() .isError', new Error() )
     .isInstanceOf( 'fail', 'test() .isInstanceOf', TestClass, 'TestClass' )
     .isClass( 'fail', 'test() .isClass', TestClass )
