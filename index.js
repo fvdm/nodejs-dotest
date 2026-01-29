@@ -18,7 +18,7 @@ const dirName = dirname( filename );
 const require = createRequire( import.meta.url );
 
 // Get the directory of the main module
-const mainModulePath = process.argv[1];
+const mainModulePath = process.argv[1] || filename;
 let { dir } = parse( mainModulePath );
 
 dir = dir.replace( /\/(lib|test)$/, '' );
