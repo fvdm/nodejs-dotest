@@ -19,8 +19,8 @@ your test.js, coverage and report to Coveralls.io when running in a CI environme
 
 ```js
 // Load test runner and your app
-const doTest = require( 'dotest' );
-const app = require( './' );
+import doTest from 'dotest';
+import app from './index.js';
 
 // Check app interface
 doTest.add( 'App interface', test => {
@@ -96,6 +96,14 @@ so best to make sure it's in your `devDependencies`
 ```sh
 npm i dotest --save-dev
 ```
+
+### ESM Support
+
+Starting from version 3.0.0, dotest uses ES modules (ESM) instead of CommonJS.
+Your package needs to have `"type": "module"` in package.json to use dotest.
+
+**Note on code coverage:**
+NYC (the current coverage tool) has limited support for ESM. For full coverage reporting with ESM projects, consider using [c8](https://www.npmjs.com/package/c8) instead of nyc in your test workflow. You can disable coverage checks by setting the `DOTEST_NOCOV=true` environment variable.
 
 
 ## Configuration

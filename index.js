@@ -13,8 +13,8 @@ import { fileURLToPath } from 'url';
 import { createRequire } from 'module';
 import * as core from '@actions/core';
 
-const __filename = fileURLToPath( import.meta.url );
-const __dirname = dirname( __filename );
+const filename = fileURLToPath( import.meta.url );
+const dirName = dirname( filename );
 const require = createRequire( import.meta.url );
 
 // Get the directory of the main module
@@ -24,7 +24,7 @@ let { dir } = parse( mainModulePath );
 dir = dir.replace( /\/(lib|test)$/, '' );
 
 const pkg = require( join( dir, 'package.json' ) );
-const lib = require( join( __dirname, 'package.json' ) );
+const lib = require( join( dirName, 'package.json' ) );
 
 const isGithubAction = process.env.GITHUB_ACTIONS === 'true';
 
