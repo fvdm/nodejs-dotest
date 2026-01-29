@@ -203,7 +203,7 @@ function done ( callback ) {
     callback( next );
   }
 
-  if ( this.startTime ) {
+  if ( this && this.startTime ) {
     ms = Date.now() - this.startTime;
 
     console.log();
