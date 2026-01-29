@@ -7,10 +7,19 @@ Feedback:       https://github.com/fvdm/nodejs-dotest/issues
 License:        Unlicense (public domain, see LICENSE file)
 */
 
-const { parse, join } = require( 'path' );
-const { inspect } = require( 'util' );
-const core = require( '@actions/core' );
-let { dir } = parse( process.mainModule.filename );
+import { parse, join, dirname } from 'path';
+import { inspect } from 'util';
+import { fileURLToPath } from 'url';
+import { createRequire } from 'module';
+import * as core from '@actions/core';
+
+const __filename = fileURLToPath( import.meta.url );
+const __dirname = dirname( __filename );
+const require = createRequire( import.meta.url );
+
+// Get the directory of the main module
+const mainModulePath = process.argv[1];
+let { dir } = parse( mainModulePath );
 
 dir = dir.replace( /\/(lib|test)$/, '' );
 
@@ -1198,7 +1207,7 @@ function setConfig ( name, value ) {
  * Module interface
  */
 
-module.exports = {
+const dotest = {
   package: pkg,
   add,
   run,
@@ -1214,3 +1223,5 @@ module.exports = {
     return queue.length;
   },
 };
+
+export default dotest;

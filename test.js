@@ -1,4 +1,4 @@
-const doTest = require( './' );
+import doTest from './index.js';
 
 let testsDone = 0;
 
