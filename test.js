@@ -79,7 +79,7 @@ doTest.add( 'test() .info()', ( test ) => {
     .info( '-- Short array:' )
     .info( ['one', 'two'] )
     .info( '-- Long array:' )
-    .info( process.mainModule.paths )
+    .info( require.main.paths )
     .done( () => testsDone++ )
   ;
 } );

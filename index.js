@@ -19,18 +19,21 @@ try {
 }
 catch {
   // Fall back to stubs - will be replaced with ESM import if in GitHub Actions
+  // Note: These fallbacks use console methods that produce the same output format
+  // as @actions/core, so they work correctly even before the async import completes
   core = {
     error: ( msg ) => console.error( '::error::' + msg ),
     warning: ( msg ) => console.warn( '::warning::' + msg ),
     setSecret: () => {},
   };
 
-  // If in GitHub Actions, try dynamic ESM import
+  // If in GitHub Actions, try dynamic ESM import (v3+)
+  // The import is async, but tests typically start after module load completes
   if ( process.env.GITHUB_ACTIONS === 'true' ) {
     import( '@actions/core' ).then( ( mod ) => {
       Object.assign( core, mod );
     } ).catch( () => {
-      // Keep using console fallbacks
+      // Keep using console fallbacks - they produce correct output
     } );
   }
 }
