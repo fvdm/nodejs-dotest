@@ -1,4 +1,4 @@
-import doTest from './index.js';
+const doTest = require( './' );
 
 let testsDone = 0;
 
@@ -79,7 +79,7 @@ doTest.add( 'test() .info()', ( test ) => {
     .info( '-- Short array:' )
     .info( ['one', 'two'] )
     .info( '-- Long array:' )
-    .info( Array.from( { length: 20 }, ( _, i ) => `item-${i}` ) )
+    .info( process.mainModule.paths )
     .done( () => testsDone++ )
   ;
 } );

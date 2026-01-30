@@ -1,5 +1,5 @@
 // Load test runner and your app
-import doTest from 'dotest';
+const doTest = require( 'dotest' );
 
 const app = {
   methodOne: callback => {

@@ -7,24 +7,51 @@ Feedback:       https://github.com/fvdm/nodejs-dotest/issues
 License:        Unlicense (public domain, see LICENSE file)
 */
 
-import { parse, join, dirname } from 'path';
-import { inspect } from 'util';
-import { fileURLToPath } from 'url';
-import { createRequire } from 'module';
-import * as core from '@actions/core';
+const { parse, join } = require( 'path' );
+const { inspect } = require( 'util' );
 
-const filename = fileURLToPath( import.meta.url );
-const dirName = dirname( filename );
-const require = createRequire( import.meta.url );
+// Load @actions/core - supports both CommonJS (v2) and ESM (v3+)
+let core;
 
-// Get the directory of the main module
-const mainModulePath = process.argv[1] || filename;
+// Try CommonJS first (v2)
+try {
+  core = require( '@actions/core' );
+}
+catch {
+  // Fall back to stubs - will be replaced with ESM import if in GitHub Actions
+  core = {
+    error: ( msg ) => console.error( '::error::' + msg ),
+    warning: ( msg ) => console.warn( '::warning::' + msg ),
+    setSecret: () => {},
+  };
+
+  // If in GitHub Actions, try dynamic ESM import
+  if ( process.env.GITHUB_ACTIONS === 'true' ) {
+    import( '@actions/core' ).then( ( mod ) => {
+      Object.assign( core, mod );
+    } ).catch( () => {
+      // Keep using console fallbacks
+    } );
+  }
+}
+
+// Get the main module path - handle deprecation of process.mainModule
+const mainModulePath = process.mainModule?.filename || require.main?.filename || process.argv[1] || __dirname;
 let { dir } = parse( mainModulePath );
 
 dir = dir.replace( /\/(lib|test)$/, '' );
 
-const pkg = require( join( dir, 'package.json' ) );
-const lib = require( join( dirName, 'package.json' ) );
+let pkg;
+
+try {
+  pkg = require( join( dir, 'package.json' ) );
+}
+catch {
+  // Fallback if package.json not found in computed dir
+  pkg = { name: 'unknown', version: '0.0.0' };
+}
+
+const lib = require( join( __dirname, 'package.json' ) );
 
 const isGithubAction = process.env.GITHUB_ACTIONS === 'true';
 
@@ -203,7 +230,7 @@ function done ( callback ) {
     callback( next );
   }
 
-  if ( this && this.startTime ) {
+  if ( this.startTime ) {
     ms = Date.now() - this.startTime;
 
     console.log();
@@ -1207,7 +1234,7 @@ function setConfig ( name, value ) {
  * Module interface
  */
 
-const dotest = {
+module.exports = {
   package: pkg,
   add,
   run,
@@ -1223,5 +1250,3 @@ const dotest = {
     return queue.length;
   },
 };
-
-export default dotest;
