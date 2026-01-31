@@ -18,6 +18,7 @@ try {
   core = require( '@actions/core' );
 }
 catch {
+  /* istanbul ignore next */
   // Fall back to stubs - will be replaced with ESM import if in GitHub Actions
   // Note: These fallbacks use console.log to produce the same output format
   // as @actions/core, while letting other functions control the exit code
@@ -33,6 +34,7 @@ catch {
     import( '@actions/core' ).then( ( mod ) => {
       Object.assign( core, mod );
     } ).catch( () => {
+      /* istanbul ignore next */
       // Keep using console fallbacks - they produce correct output
     } );
   }
@@ -50,6 +52,7 @@ try {
   pkg = require( join( dir, 'package.json' ) );
 }
 catch {
+  /* istanbul ignore next */
   // Fallback if package.json not found in computed dir
   pkg = { name: 'unknown', version: '0.0.0' };
 }
