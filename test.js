@@ -5,8 +5,9 @@ let testsDone = 0;
 
 // Test onExit callback
 doTest.onExit( () => {
+  // Updated from 8 to 9
   doTest.test()
-    .isExactly( 'fail', 'testsDone', testsDone, 9 )  // Updated from 8 to 9
+    .isExactly( 'fail', 'testsDone', testsDone, 9 )
   ;
 } );
 
@@ -189,25 +190,32 @@ doTest.add( 'Configuration variations', test => {
   // Save original values
   const origWait = process.env.DOTEST_WAIT;
   const origNoConsole = doTest.config().noConsole;
-  
+
   // Test with DOTEST_WAIT
   process.env.DOTEST_WAIT = '10';
   const configWithWait = doTest.config();
-  
+
   // Test with noConsole
   doTest.config( 'noConsole', true );
   const configWithNoConsole = doTest.config();
-  
+
   // Restore
   process.env.DOTEST_WAIT = origWait;
   doTest.config( 'noConsole', origNoConsole );
-  
+
   // Test log() with and without dontCount to cover those branches
-  doTest.log( 'fail', 'Test fail without dontCount' );  // dontCount=false
-  doTest.log( 'fail', 'Test fail with dontCount', true );  // dontCount=true
-  doTest.log( 'error', new Error( 'Test error without dontCount' ) );  // dontCount=false
-  doTest.log( 'error', new Error( 'Test error with dontCount' ), true );  // dontCount=true
-  
+  // dontCount=false
+  doTest.log( 'fail', 'Test fail without dontCount' );
+
+  // dontCount=true
+  doTest.log( 'fail', 'Test fail with dontCount', true );
+
+  // dontCount=false
+  doTest.log( 'error', new Error( 'Test error without dontCount' ) );
+
+  // dontCount=true
+  doTest.log( 'error', new Error( 'Test error with dontCount' ), true );
+
   test()
     .isObject( 'fail', 'config object', configWithWait )
     .isObject( 'fail', 'config object with noConsole', configWithNoConsole )
