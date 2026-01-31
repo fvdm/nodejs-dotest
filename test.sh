@@ -84,6 +84,7 @@ elif [[ -x "$nycBin" ]]; then
   --exclude='**/eslint.config.mjs' \
   --exclude='**/preinstall.js' \
   --exclude='**/test.js' \
+  --exclude='**/test-non-gh.js' \
   --exclude='**/testing/**' \
   --exclude='**/example.js' \
   --exclude='**/coverage/**' \
@@ -93,6 +94,13 @@ elif [[ -x "$nycBin" ]]; then
   --reporter=lcov \
   --reporter=text \
   node test.js || result=1
+
+  # Run non-GitHub Actions test to cover those paths
+  GITHUB_ACTIONS=false "$nycBin" \
+  --no-clean \
+  --reporter=lcov \
+  --reporter=text \
+  node test-non-gh.js || result=1
 
   # Submit coverage to Coveralls.io
   if [[ "$CI" == "true" && "$GITHUB_ACTIONS" != "true" ]]; then

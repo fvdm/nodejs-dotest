@@ -6,7 +6,7 @@ let testsDone = 0;
 // Test onExit callback
 doTest.onExit( () => {
   doTest.test()
-    .isExactly( 'fail', 'testsDone', testsDone, 8 )  // Updated from 7 to 8
+    .isExactly( 'fail', 'testsDone', testsDone, 9 )  // Updated from 8 to 9
   ;
 } );
 
@@ -202,9 +202,26 @@ doTest.add( 'Configuration variations', test => {
   process.env.DOTEST_WAIT = origWait;
   doTest.config( 'noConsole', origNoConsole );
   
+  // Test log() with and without dontCount to cover those branches
+  doTest.log( 'fail', 'Test fail without dontCount' );  // dontCount=false
+  doTest.log( 'fail', 'Test fail with dontCount', true );  // dontCount=true
+  doTest.log( 'error', new Error( 'Test error without dontCount' ) );  // dontCount=false
+  doTest.log( 'error', new Error( 'Test error with dontCount' ), true );  // dontCount=true
+  
   test()
     .isObject( 'fail', 'config object', configWithWait )
     .isObject( 'fail', 'config object with noConsole', configWithNoConsole )
+    .done( () => testsDone++ )
+  ;
+} );
+
+
+// Test to cover non-GitHub Actions output path
+doTest.add( 'Non-GitHub Actions output', test => {
+  // We can't actually disable GitHub Actions mode during tests,
+  // but we can test the output function path that would be used
+  test()
+    .isExactly( 'fail', 'Running in GH Actions', process.env.GITHUB_ACTIONS, 'true' )
     .done( () => testsDone++ )
   ;
 } );

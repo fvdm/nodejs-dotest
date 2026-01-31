@@ -273,11 +273,9 @@ function done ( callback ) {
   log( 'info', colorStr( 'yellow', timing ) + ' seconds' );
   console.log();
 
-  /* istanbul ignore next */
   if ( counters.fail ) {
     process.exit( 1 );
   }
-  /* istanbul ignore next */
   else {
     process.exit( 0 );
   }
@@ -476,7 +474,6 @@ function output ( level, what, result, describe ) {
   }
 
   // output normal
-  /* istanbul ignore next */
   console.log( str );
 }
 
