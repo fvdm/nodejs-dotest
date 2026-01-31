@@ -19,11 +19,11 @@ try {
 }
 catch {
   // Fall back to stubs - will be replaced with ESM import if in GitHub Actions
-  // Note: These fallbacks use console methods that produce the same output format
-  // as @actions/core, so they work correctly even before the async import completes
+  // Note: These fallbacks use console.log to produce the same output format
+  // as @actions/core, while letting other functions control the exit code
   core = {
-    error: ( msg ) => console.error( '::error::' + msg ),
-    warning: ( msg ) => console.warn( '::warning::' + msg ),
+    error: ( msg ) => console.log( '::error::' + msg ),
+    warning: ( msg ) => console.log( '::warning::' + msg ),
     setSecret: () => {},
   };
 
