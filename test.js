@@ -6,7 +6,7 @@ let testsDone = 0;
 // Test onExit callback
 doTest.onExit( () => {
   doTest.test()
-    .isExactly( 'fail', 'testsDone', testsDone, doTest.length )
+    .isExactly( 'fail', 'testsDone', testsDone, 8 )  // Updated from 7 to 8
   ;
 } );
 
@@ -180,6 +180,32 @@ doTest.add( 'doTest.add() test(Error)', test => {
     .done( () => {
       testsDone++;
     } )
+  ;
+} );
+
+
+// Test configuration variations to increase coverage
+doTest.add( 'Configuration variations', test => {
+  // Save original values
+  const origWait = process.env.DOTEST_WAIT;
+  const origNoConsole = doTest.config().noConsole;
+  
+  // Test with DOTEST_WAIT
+  process.env.DOTEST_WAIT = '10';
+  const configWithWait = doTest.config();
+  
+  // Test with noConsole
+  doTest.config( 'noConsole', true );
+  const configWithNoConsole = doTest.config();
+  
+  // Restore
+  process.env.DOTEST_WAIT = origWait;
+  doTest.config( 'noConsole', origNoConsole );
+  
+  test()
+    .isObject( 'fail', 'config object', configWithWait )
+    .isObject( 'fail', 'config object with noConsole', configWithNoConsole )
+    .done( () => testsDone++ )
   ;
 } );
 

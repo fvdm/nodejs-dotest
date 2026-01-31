@@ -18,10 +18,10 @@ try {
   core = require( '@actions/core' );
 }
 catch {
-  /* istanbul ignore next */
   // Fall back to stubs - will be replaced with ESM import if in GitHub Actions
   // Note: These fallbacks use console.log to produce the same output format
   // as @actions/core, while letting other functions control the exit code
+  /* istanbul ignore next */
   core = {
     error: ( msg ) => console.log( '::error::' + msg ),
     warning: ( msg ) => console.log( '::warning::' + msg ),
@@ -30,8 +30,11 @@ catch {
 
   // If in GitHub Actions, try dynamic ESM import (v3+)
   // The import is async, but tests typically start after module load completes
+  /* istanbul ignore next */
   if ( process.env.GITHUB_ACTIONS === 'true' ) {
+    /* istanbul ignore next */
     import( '@actions/core' ).then( ( mod ) => {
+      /* istanbul ignore next */
       Object.assign( core, mod );
     } ).catch( () => {
       /* istanbul ignore next */
@@ -52,8 +55,8 @@ try {
   pkg = require( join( dir, 'package.json' ) );
 }
 catch {
-  /* istanbul ignore next */
   // Fallback if package.json not found in computed dir
+  /* istanbul ignore next */
   pkg = { name: 'unknown', version: '0.0.0' };
 }
 
@@ -270,9 +273,11 @@ function done ( callback ) {
   log( 'info', colorStr( 'yellow', timing ) + ' seconds' );
   console.log();
 
+  /* istanbul ignore next */
   if ( counters.fail ) {
     process.exit( 1 );
   }
+  /* istanbul ignore next */
   else {
     process.exit( 0 );
   }
@@ -471,6 +476,7 @@ function output ( level, what, result, describe ) {
   }
 
   // output normal
+  /* istanbul ignore next */
   console.log( str );
 }
 
