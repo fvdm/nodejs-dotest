@@ -91,7 +91,7 @@ elif [[ -x "$nycBin" ]]; then
   --exclude='**/.git/**' \
   --exclude='**/node_modules/**' \
   --reporter=lcov \
-  --reporter=text \
+  --reporter=text-summary \
   node test.js || result=1
 
   # Submit coverage to Coveralls.io
